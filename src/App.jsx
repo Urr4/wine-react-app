@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Text from './Components/Basic/Text'
 
 class App extends Component {
   render() {
-    return <Text content={'Test Mann'} />
+    return (
+      <Text content={'Test Mann'}/>
+    )
   }
 }
 
