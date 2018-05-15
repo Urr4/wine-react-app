@@ -1,14 +1,13 @@
 import React from 'react'
 import UserAvatar from "../../src/Components/User/UserAvatar";
 import user from "./fixtures/user.json"
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {MuiThemeProviderDecorator} from "../decorators";
 
 export default storiesOf =>
   storiesOf('Components/User', module)
+    .addDecorator(MuiThemeProviderDecorator)
     .add('UserAvatar', () => (
-      <MuiThemeProvider>
         <UserAvatar
           user={user}
         />
-      </MuiThemeProvider>
     ))
