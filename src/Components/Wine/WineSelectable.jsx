@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from "prop-types"
 import {Card, CardHeader, CardText} from 'material-ui'
 import {getHexColor} from '../../Utils/wineUtil'
+import {BerrySelectable} from "../Berry/BerrySelectable";
 
 class WineSelectable extends Component {
   constructor(props) {
@@ -27,6 +28,14 @@ class WineSelectable extends Component {
                     showExpandableButton={!!this.props.children}
                     titleColor={getHexColor(this.state.wine.color)}
         >
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+          }}>
+            {this.state.wine.berries.map(berry => (
+              <BerrySelectable berry={berry}/>
+            ))}
+          </div>
         </CardHeader>
         <CardText expandable={true}>
           {this.props.children}

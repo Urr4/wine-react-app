@@ -13,7 +13,13 @@
       "acid": 7.3,
       "alcohol": 11.4,
       "bottleSize": 0.75,
-      "price": 5.25
+      "price": 5.25,
+      "berries": [
+        {
+          "id": 0,
+          "name": "Riesling"
+        }
+      ]
     },
     {
       "id": 1,
@@ -23,7 +29,13 @@
       "acid": 7.3,
       "alcohol": 11.4,
       "bottleSize": 0.75,
-      "price": 5.25
+      "price": 5.25,
+      "berries": [
+        {
+          "id": 0,
+          "name": "Riesling"
+        }
+      ]
     },
     {
       "id": 2,
@@ -33,7 +45,13 @@
       "acid": 7.3,
       "alcohol": 11.4,
       "bottleSize": 0.75,
-      "price": 5.25
+      "price": 5.25,
+      "berries": [
+        {
+          "id": 0,
+          "name": "Riesling"
+        }
+      ]
     }
   ]
 }
