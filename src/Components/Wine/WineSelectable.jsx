@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import PropTypes from "prop-types";
-import {Card, CardHeader, CardText} from 'material-ui';
+import PropTypes from "prop-types"
+import {Card, CardHeader, CardText} from 'material-ui'
+import {getHexColor} from '../../Utils/wineUtil'
 
 class WineSelectable extends Component {
   constructor(props) {
@@ -9,21 +10,7 @@ class WineSelectable extends Component {
       wine: props.wine
     }
 
-    this.getColor = this.getColor.bind(this)
     this.wineToString = this.wineToString.bind(this)
-  }
-
-  getColor() {
-    switch (this.state.wine.color) {
-      case "RED":
-        return '#cc0044'
-      case "WHITE":
-        return '#fffd33'
-      case "ROSE":
-        return '#ff00aa'
-      default:
-        return '#808080'
-    }
   }
 
   wineToString() {
@@ -38,7 +25,7 @@ class WineSelectable extends Component {
                     subtitle={this.wineToString()}
                     actAsExpander={!!this.props.children}
                     showExpandableButton={!!this.props.children}
-                    titleColor={this.getColor()}
+                    titleColor={getHexColor(this.state.wine.color)}
         >
         </CardHeader>
         <CardText expandable={true}>
