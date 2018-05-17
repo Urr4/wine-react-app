@@ -1,0 +1,125 @@
+[
+  {
+    "id": 0,
+    "name": "Mustermanns Muster-Weine",
+    "address": "Musterstraße 99, 12345 Musterstadt",
+    "email": "muster@mann.de",
+    "isActive": true,
+    "wines": [
+      {
+        "id": 0,
+        "name": "Some Wine 1",
+        "color": "RED",
+        "restSugar": 12.5,
+        "acid": 7.3,
+        "alcohol": 11.4,
+        "bottleSize": 0.75,
+        "price": 5.25,
+        "berries": [
+          {
+            "id": 0,
+            "name": "Riesling"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Some Wine 2",
+        "color": "RED",
+        "restSugar": 12.5,
+        "acid": 7.3,
+        "alcohol": 11.4,
+        "bottleSize": 0.75,
+        "price": 5.25,
+        "berries": [
+          {
+            "id": 0,
+            "name": "Riesling"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Some Wine 3",
+        "color": "RED",
+        "restSugar": 12.5,
+        "acid": 7.3,
+        "alcohol": 11.4,
+        "bottleSize": 0.75,
+        "price": 5.25,
+        "berries": [
+          {
+            "id": 0,
+            "name": "Riesling"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Mustermanns Best Wine Ever",
+    "address": "Musterstraße 99, 12345 Musterstadt",
+    "email": "muster@mann.de",
+    "isActive": true,
+    "wines": [
+      {
+        "id": 0,
+        "name": "Some Wine 1",
+        "color": "RED",
+        "restSugar": 12.5,
+        "acid": 7.3,
+        "alcohol": 11.4,
+        "bottleSize": 0.75,
+        "price": 5.25,
+        "berries": [
+          {
+            "id": 0,
+            "name": "Riesling"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Some Wine 2",
+        "color": "RED",
+        "restSugar": 12.5,
+        "acid": 7.3,
+        "alcohol": 11.4,
+        "bottleSize": 0.75,
+        "price": 5.25,
+        "berries": [
+          {
+            "id": 0,
+            "name": "Riesling"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Meisters Wine Dungeon",
+    "address": "Musterstraße 99, 12345 Musterstadt",
+    "email": "muster@mann.de",
+    "isActive": false,
+    "wines": [
+      {
+        "id": 1,
+        "name": "Some Wine 2",
+        "color": "RED",
+        "restSugar": 12.5,
+        "acid": 7.3,
+        "alcohol": 11.4,
+        "bottleSize": 0.75,
+        "price": 5.25,
+        "berries": [
+          {
+            "id": 0,
+            "name": "Riesling"
+          }
+        ]
+      }
+    ]
+  }
+]

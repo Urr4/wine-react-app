@@ -11,6 +11,14 @@ class SellerSelectable extends Component {
     }
   }
 
+  getColor(){
+    if(this.state.seller.isActive){
+      return '#FFFFFF'
+    }else{
+      return '#bbbbbb'
+    }
+  }
+
   render() {
     return (
       <Card>
@@ -19,6 +27,7 @@ class SellerSelectable extends Component {
           subtitle={this.state.seller.email}
           actAsExpander={true}
           showExpandableButton={true}
+          style={{"backgroundColor":this.getColor()}}
         ></CardTitle>
         <Divider/>
         <CardText expandable={true}>

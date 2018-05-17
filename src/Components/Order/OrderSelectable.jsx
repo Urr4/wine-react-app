@@ -27,6 +27,7 @@ class OrderSelectable extends Component {
                 <ListItem
                   key={"OrderSelectable/"+orderedWine.id}
                   primaryText={orderedWine.wine.name}
+                  disabled={true}
                   leftAvatar={
                     <Avatar
                       backgroundColor={getHexColor(orderedWine.wine.color)}
