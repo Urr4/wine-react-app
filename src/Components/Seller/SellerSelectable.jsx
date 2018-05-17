@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import {Card, CardHeader, CardTitle, CardText, Divider} from 'material-ui'
+import {Card, CardHeader, CardText, CardTitle, Divider} from 'material-ui'
 import {WineSelectable} from "../Wine/WineSelectable";
+import {Map, TileLayer} from 'react-leaflet'
 
 class SellerSelectable extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class SellerSelectable extends Component {
     }
   }
 
-  render(){
+  render() {
     return (
       <Card>
         <CardTitle
@@ -23,16 +24,25 @@ class SellerSelectable extends Component {
         <CardText expandable={true}>
           {this.state.seller.wines.map(wine => (
             <WineSelectable
-              key={"SellerSelectable/"+wine.id}
+              key={"SellerSelectable/" + wine.id}
               wine={wine}
             />
           ))}
         </CardText>
         <Divider/>
-        <CardHeader
-          title={this.state.seller.address}
+        <CardText
           expandable={true}
-        ></CardHeader>
+        >
+          <div className="map">
+            <Map center={[52.499040, 13.418392]} zoom={8} className="map__reactleaflet">
+              <TileLayer
+                url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
+              />
+              <div style={{"height":300}}></div>
+            </Map>
+          </div>
+        </CardText>
       </Card>
     )
   }
