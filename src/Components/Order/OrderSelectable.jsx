@@ -25,7 +25,7 @@ class OrderSelectable extends Component {
             {this.state.order.orderedWines.map(orderedWine => {
               return (
                 <ListItem
-                  key={orderedWine.id}
+                  key={"OrderSelectable/"+orderedWine.id}
                   primaryText={orderedWine.wine.name}
                   leftAvatar={
                     <Avatar

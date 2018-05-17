@@ -17,11 +17,15 @@ class SellerSelectable extends Component {
           title={this.state.seller.name}
           subtitle={this.state.seller.email}
           actAsExpander={true}
+          showExpandableButton={true}
         ></CardTitle>
         <Divider/>
         <CardText expandable={true}>
           {this.state.seller.wines.map(wine => (
-            <WineSelectable wine={wine}/>
+            <WineSelectable
+              key={"SellerSelectable/"+wine.id}
+              wine={wine}
+            />
           ))}
         </CardText>
         <Divider/>

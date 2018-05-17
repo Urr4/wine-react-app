@@ -33,7 +33,10 @@ class WineSelectable extends Component {
             flexWrap: 'wrap',
           }}>
             {this.state.wine.berries.map(berry => (
-              <BerrySelectable berry={berry}/>
+              <BerrySelectable
+                berry={berry}
+                key={"WineSelectable/"+berry.id}
+              />
             ))}
           </div>
         </CardHeader>
