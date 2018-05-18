@@ -37,6 +37,7 @@ class SellerSelectable extends Component {
               wine={wine}
             />
           ))}
+          {this.props.children}
         </CardText>
         <Divider/>
         <CardText
