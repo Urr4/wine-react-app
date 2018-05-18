@@ -3,6 +3,8 @@
     "id": 0,
     "name": "Mustermanns Muster-Weine",
     "address": "Musterstraße 99, 12345 Musterstadt",
+    "lat": 52.499040,
+    "lng": 13.418392,
     "email": "muster@mann.de",
     "isActive": true,
     "wines": [
@@ -60,6 +62,8 @@
     "id": 1,
     "name": "Mustermanns Best Wine Ever",
     "address": "Musterstraße 99, 12345 Musterstadt",
+    "lat": 51.399040,
+    "lng": 11.428392,
     "email": "muster@mann.de",
     "isActive": true,
     "wines": [
@@ -101,6 +105,8 @@
     "id": 2,
     "name": "Meisters Wine Dungeon",
     "address": "Musterstraße 99, 12345 Musterstadt",
+    "lat": 50.300040,
+    "lng": 12.411192,
     "email": "muster@mann.de",
     "isActive": false,
     "wines": [

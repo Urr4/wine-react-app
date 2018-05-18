@@ -2,6 +2,8 @@
   "id": 0,
   "name": "Mustermanns Muster-Weine",
   "address": "Musterstraße 99, 12345 Musterstadt",
+  "lat": 52.499040,
+  "lng": 13.418392,
   "email": "muster@mann.de",
   "isActive": true,
   "wines": [
