@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Card, CardHeader, CardText } from 'material-ui'
 import { getHexColor } from '../../Utils/wineUtil'
-import { BerrySelectable } from '../Berry/BerrySelectable'
+import { BerryChip } from '../Berry/BerryChip'
 
 class WineSelectable extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class WineSelectable extends Component {
             }}
           >
             {this.state.wine.berries.map(berry => (
-              <BerrySelectable berry={berry} key={'WineSelectable/' + berry.id} />
+              <BerryChip berry={berry} key={'WineSelectable/' + berry.id} />
             ))}
           </div>
         </CardHeader>

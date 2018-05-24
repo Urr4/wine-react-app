@@ -7,6 +7,8 @@ import {MuiThemeProviderDecorator} from '../decorators'
 import {WineSelectable} from "../../src/Components/Wine/WineSelectable";
 import WineForm from "../../src/Components/Wine/WineForm";
 import WineView from "../../src/Views/WineView";
+import WineCounter from "../../src/Components/Wine/WineCounter";
+import WineCounterList from "../../src/Components/Wine/WineCounterList";
 
 export default storiesOf =>
   storiesOf('Components/Wine', module)
@@ -23,6 +25,14 @@ export default storiesOf =>
           wine={rosewine}
         />
       </div>
+    ))
+
+    .add('WineCounter', () => (
+      <WineCounter wine={whitewine}/>
+    ))
+
+    .add('WineCounterList', () => (
+      <WineCounterList wines={wines}/>
     ))
 
     .add('WineForm', () => (

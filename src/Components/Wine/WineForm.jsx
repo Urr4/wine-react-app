@@ -15,6 +15,7 @@ class WineForm extends Component {
           id={this.state.wine.id + '/name'}
           floatingLabelText="Name"
           defaultValue={this.state.wine.name}
+          fullWidth={true}
         />
         <br />
         <TextField

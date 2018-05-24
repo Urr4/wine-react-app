@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "name": "Some Wine",
+    "name": "Some Wine Red",
     "color": "RED",
     "restSugar": 12.5,
     "acid": 7.3,
@@ -21,7 +21,7 @@
   },
   {
     "id": 1,
-    "name": "Some Wine",
+    "name": "Some Wine White",
     "color": "WHITE",
     "restSugar": 12.5,
     "acid": 7.3,
@@ -37,7 +37,7 @@
   },
   {
     "id": 2,
-    "name": "Some Wine",
+    "name": "Some Wine Rose",
     "color": "ROSE",
     "restSugar": 12.5,
     "acid": 7.3,

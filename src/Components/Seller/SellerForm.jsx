@@ -15,18 +15,21 @@ class SellerForm extends Component {
           id={this.state.seller.id + '/name'}
           floatingLabelText="Name"
           defaultValue={this.state.seller.name}
+          fullWidth={true}
         />
         <br />
         <TextField
           id={this.state.seller.id + '/address'}
           floatingLabelText="Adresse"
           defaultValue={this.state.seller.address}
+          fullWidth={true}
         />
         <br />
         <TextField
           id={this.state.seller.id + '/email'}
           floatingLabelText="Email"
           defaultValue={this.state.seller.email}
+          fullWidth={true}
         />
         <br />
         <FlatButton primary={true}>Save</FlatButton>

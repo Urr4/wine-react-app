@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Chip, Avatar, FontIcon } from 'material-ui'
 
-class BerrySelectable extends Component {
+class BerryChip extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -29,4 +29,4 @@ class BerrySelectable extends Component {
   }
 }
 
-export { BerrySelectable }
+export { BerryChip }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import UserSelectable from '../Components/User/UserSelectable'
+import UserChip from '../Components/User/UserChip'
 import { List, ListItem } from 'material-ui'
 
 class UserView extends Component {
@@ -15,7 +15,7 @@ class UserView extends Component {
       <List>
         {this.state.users.map(user => (
           <ListItem key={'UserView/' + user.id} disableTouchRipple={true}>
-            <UserSelectable user={user} />
+            <UserChip user={user} />
           </ListItem>
         ))}
       </List>

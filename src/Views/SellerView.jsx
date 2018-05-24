@@ -1,13 +1,18 @@
-import React, { Component } from 'react'
-import { SellerSelectable } from '../Components/Seller/SellerSelectable'
-import { List, ListItem, Paper } from 'material-ui'
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import React, {Component} from 'react'
+import {SellerSelectable} from '../Components/Seller/SellerSelectable'
+import {Dialog, FlatButton, List, ListItem, Paper} from 'material-ui'
+import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
+import {SellerForm} from "../Components/Seller/SellerForm";
+import WineView from "./WineView";
+import WineCounterList from "../Components/Wine/WineCounterList";
 
 class SellerView extends Component {
   constructor(props) {
     super(props)
     this.state = {
       sellers: props.sellers,
+      editSeller: false,
+      orderSeller: false
     }
 
     this.style = {
@@ -18,13 +23,32 @@ class SellerView extends Component {
     }
   }
 
-  mouseOver(seller) {
+  onSellerClick(seller) {
     return () => {
       this.setState(
         oldState => ({
           selectedSeller: seller,
-        }),
-        () => console.log(this.state)
+        })
+      )
+    }
+  }
+
+  openSellerForm(seller) {
+    return () => {
+      this.setState(
+        oldState => ({
+          editSeller: seller
+        })
+      )
+    }
+  }
+
+  openOrderForm(seller) {
+    return () => {
+      this.setState(
+        oldState => ({
+          orderSeller: seller
+        })
       )
     }
   }
@@ -42,29 +66,86 @@ class SellerView extends Component {
       })
       center = [this.state.selectedSeller.lat, this.state.selectedSeller.lng]
     }
-    console.log(markers, center)
+
+    const editActions = [
+      <FlatButton
+        label="Bestellen"
+        primary={true}
+        onClick={() => ({})}
+      />,
+      <FlatButton
+        label="Abbrechen"
+        primary={true}
+        keyboardFocused={true}
+        onClick={() => ({})}
+      />
+    ]
+    const orderActions = [
+      <FlatButton
+        label="Bestellen"
+        primary={true}
+        onClick={() => ({})}
+      />,
+      <FlatButton
+        label="Abbrechen"
+        primary={true}
+        keyboardFocused={true}
+        onClick={() => ({})}
+      />
+    ]
+
     return (
-      <div style={{ display: 'flex' }}>
+      <div style={{display: 'flex'}}>
+
+        <Dialog
+          title={"Editiere " + this.state.editSeller.name}
+          actions={editActions}
+          modal={false}
+          open={!!this.state.editSeller}
+          autoScrollBodyContent={true}
+          onRequestClose={() => ({
+            //TODO
+          })}
+        >
+          <SellerForm seller={this.state.editSeller}/>
+          <WineView wines={this.state.editSeller.wines}/>
+        </Dialog>
+
+        <Dialog
+          title={"Bestellen bei " + this.state.orderSeller.name}
+          actions={orderActions}
+          modal={false}
+          open={!!this.state.orderSeller}
+          autoScrollBodyContent={true}
+          onRequestClose={() => ({
+            //TODO
+          })}
+        >
+          <WineCounterList wines={this.state.orderSeller.wines}/>
+        </Dialog>
+
         <Paper style={this.style}>
           <List>
             {this.state.sellers.map(seller => (
               <ListItem
                 key={'SellerView/' + seller.id}
                 disableTouchRipple={true}
-                onClick={this.mouseOver(seller)}
+                onClick={this.onSellerClick(seller)}
               >
-                <SellerSelectable seller={seller} />
+                <SellerSelectable seller={seller}/>
+                <FlatButton onClick={this.openSellerForm(seller)}>Edit</FlatButton>
+                <FlatButton onClick={this.openOrderForm(seller)}>Order</FlatButton>
               </ListItem>
             ))}
           </List>
         </Paper>
         <Paper style={this.style}>
-          <Map center={center} zoom={16} className="map__reactleaflet">
+          <Map center={center} zoom={13} className="map__reactleaflet">
             <TileLayer
               attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
               url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
             />
-            <div style={{ height: 500 }}>
+            <div style={{height: 500}}>
               {markers.map((marker, index) => (
                 <Marker position={marker.position} key={`marker_${index}`}>
                   <Popup>
