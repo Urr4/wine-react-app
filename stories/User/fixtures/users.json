@@ -1,0 +1,100 @@
+[
+  {
+    "id": 0,
+    "name": "Marty Mockup",
+    "likedWines": [
+      {
+        "id": 0,
+        "name": "Some Wine",
+        "color": "RED",
+        "restSugar": 12.5,
+        "acid": 7.3,
+        "alcohol": 11.4,
+        "bottleSize": 0.75,
+        "price": 5.25,
+        "berries": [
+          {
+            "id": 0,
+            "name": "Riesling"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Some Wine",
+        "color": "ROSE",
+        "restSugar": 12.5,
+        "acid": 7.3,
+        "alcohol": 11.4,
+        "bottleSize": 0.75,
+        "price": 5.25,
+        "berries": [
+          {
+            "id": 0,
+            "name": "Riesling"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Arnold Glibberling",
+    "likedWines": [
+      {
+        "id": 0,
+        "name": "Some Wine",
+        "color": "RED",
+        "restSugar": 12.5,
+        "acid": 7.3,
+        "alcohol": 11.4,
+        "bottleSize": 0.75,
+        "price": 5.25,
+        "berries": [
+          {
+            "id": 0,
+            "name": "Riesling"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Some Wine",
+        "color": "ROSE",
+        "restSugar": 12.5,
+        "acid": 7.3,
+        "alcohol": 11.4,
+        "bottleSize": 0.75,
+        "price": 5.25,
+        "berries": [
+          {
+            "id": 0,
+            "name": "Riesling"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Peter Peterson",
+    "likedWines": [
+      {
+        "id": 0,
+        "name": "Some Wine",
+        "color": "RED",
+        "restSugar": 12.5,
+        "acid": 7.3,
+        "alcohol": 11.4,
+        "bottleSize": 0.75,
+        "price": 5.25,
+        "berries": [
+          {
+            "id": 0,
+            "name": "Riesling"
+          }
+        ]
+      }
+    ]
+  }
+]

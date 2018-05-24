@@ -9,16 +9,17 @@ class UserSelectable extends Component {
       user: props.user,
     }
 
-    this.selected = this.selected.bind(this)
+    this.onClick = props.onClick
+
+    if(!this.onClick){
+      this.onClick = () => {}
+    }
   }
 
-  selected() {
-    alert('Clicked')
-  }
 
   render() {
     return (
-      <Chip onClick={this.selected}>
+      <Chip onClick={this.onClick}>
         <Avatar icon={<FontIcon className="material-icons">perm_identity</FontIcon>} />
         {this.state.user.name}
       </Chip>
@@ -30,6 +31,7 @@ UserSelectable.propType = {
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
   }).isRequired,
+  onClick: PropTypes.func
 }
 
 export default UserSelectable

@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {Card, CardText, CardTitle, Divider} from 'material-ui'
-import {WineSelectable} from '../Wine/WineSelectable'
+import React, { Component } from 'react'
+import { Card, CardText, CardTitle, Divider } from 'material-ui'
+import { WineSelectable } from '../Wine/WineSelectable'
 
 class SellerSelectable extends Component {
   constructor(props) {

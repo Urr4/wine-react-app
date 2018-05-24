@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {SellerSelectable} from '../Components/Seller/SellerSelectable'
-import {List, ListItem, Paper} from 'material-ui'
-import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
+import React, { Component } from 'react'
+import { SellerSelectable } from '../Components/Seller/SellerSelectable'
+import { List, ListItem, Paper } from 'material-ui'
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 
 class SellerView extends Component {
   constructor(props) {
@@ -11,19 +11,21 @@ class SellerView extends Component {
     }
 
     this.style = {
-      height: "100%",
-      width: "100%",
-      margin: "10px",
-      display: "inline-block"
+      height: '100%',
+      width: '100%',
+      margin: '10px',
+      display: 'inline-block',
     }
   }
 
   mouseOver(seller) {
     return () => {
-      this.setState(oldState => ({
-          selectedSeller: seller
-        })
-      , ()=>console.log(this.state))
+      this.setState(
+        oldState => ({
+          selectedSeller: seller,
+        }),
+        () => console.log(this.state)
+      )
     }
   }
 
@@ -34,20 +36,24 @@ class SellerView extends Component {
       markers.push({
         position: {
           lat: this.state.selectedSeller.lat,
-          lng: this.state.selectedSeller.lng
+          lng: this.state.selectedSeller.lng,
         },
-        content: this.state.selectedSeller.name
+        content: this.state.selectedSeller.name,
       })
       center = [this.state.selectedSeller.lat, this.state.selectedSeller.lng]
     }
     console.log(markers, center)
     return (
-      <div style={{display: "flex"}}>
+      <div style={{ display: 'flex' }}>
         <Paper style={this.style}>
           <List>
             {this.state.sellers.map(seller => (
-              <ListItem key={'SellerView/' + seller.id} disableTouchRipple={true} onClick={this.mouseOver(seller)}>
-                <SellerSelectable seller={seller}/>
+              <ListItem
+                key={'SellerView/' + seller.id}
+                disableTouchRipple={true}
+                onClick={this.mouseOver(seller)}
+              >
+                <SellerSelectable seller={seller} />
               </ListItem>
             ))}
           </List>
@@ -58,7 +64,7 @@ class SellerView extends Component {
               attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
               url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
             />
-            <div style={{height: 500}}>
+            <div style={{ height: 500 }}>
               {markers.map((marker, index) => (
                 <Marker position={marker.position} key={`marker_${index}`}>
                   <Popup>
