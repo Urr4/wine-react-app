@@ -1,9 +1,9 @@
 class Order {
-  constructor(porto, fullPrice){
-    this.porto = porto;
-    this.fullPrice = fullPrice;
-    this.wines = [];
+  constructor(porto, fullPrice) {
+    this.porto = porto
+    this.fullPrice = fullPrice
+    this.wines = []
   }
 }
 
-export default Order;
+export default Order

@@ -1,12 +1,10 @@
-
-
-export const getHexColor = (color) => {
+export const getHexColor = color => {
   switch (color) {
-    case "RED":
+    case 'RED':
       return '#cc0044'
-    case "WHITE":
+    case 'WHITE':
       return '#ffc128'
-    case "ROSE":
+    case 'ROSE':
       return '#ff00aa'
     default:
       return '#808080'

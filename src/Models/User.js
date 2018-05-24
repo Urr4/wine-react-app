@@ -1,13 +1,13 @@
 class User {
-  constructor(name){
-    this.name = name;
-    this.likedWines = [];
+  constructor(name) {
+    this.name = name
+    this.likedWines = []
   }
 }
 
 User.propTypes = {
   name: PropTypes.string,
-  likedWines: PropTypes.arrayOf()
+  likedWines: PropTypes.arrayOf(),
 }
 
-export default User;
+export default User

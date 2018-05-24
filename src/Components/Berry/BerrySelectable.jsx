@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
-import {Chip, Avatar, FontIcon} from 'material-ui'
+import React, { Component } from 'react'
+import { Chip, Avatar, FontIcon } from 'material-ui'
 
 class BerrySelectable extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      berry: props.berry
+      berry: props.berry,
     }
 
     this.selected = this.selected.bind(this)
@@ -17,13 +17,9 @@ class BerrySelectable extends Component {
 
   render() {
     return (
-      <Chip
-        onClick={this.selected}
-        backgroundColor={'#1dae41'}
-        labelColor={'#ffffff'}
-      >
+      <Chip onClick={this.selected} backgroundColor={'#1dae41'} labelColor={'#ffffff'}>
         <Avatar
-          icon={<FontIcon className="fab fa-pagelines"></FontIcon>}
+          icon={<FontIcon className="fab fa-pagelines" />}
           color={'#1DAE41'}
           backgroundColor={'#ffffff'}
         />
@@ -33,4 +29,4 @@ class BerrySelectable extends Component {
   }
 }
 
-export {BerrySelectable}
+export { BerrySelectable }

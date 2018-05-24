@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {Chip, Avatar, FontIcon} from 'material-ui';
-import PropTypes from "prop-types";
+import React, { Component } from 'react'
+import { Chip, Avatar, FontIcon } from 'material-ui'
+import PropTypes from 'prop-types'
 
 class UserSelectable extends Component {
   constructor(props) {
@@ -12,15 +12,13 @@ class UserSelectable extends Component {
     this.selected = this.selected.bind(this)
   }
 
-  selected(){
+  selected() {
     alert('Clicked')
   }
 
   render() {
     return (
-      <Chip
-        onClick={this.selected}
-      >
+      <Chip onClick={this.selected}>
         <Avatar icon={<FontIcon className="material-icons">perm_identity</FontIcon>} />
         {this.state.user.name}
       </Chip>
@@ -31,7 +29,7 @@ class UserSelectable extends Component {
 UserSelectable.propType = {
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
-  }).isRequired
+  }).isRequired,
 }
 
-export default UserSelectable;
+export default UserSelectable
