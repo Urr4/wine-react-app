@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, CardText, CardTitle, Divider } from 'material-ui'
+import { Card, CardText, CardTitle, CardActions, Divider } from 'material-ui'
 import { WineSelectable } from '../Wine/WineSelectable'
 
 class SellerSelectable extends Component {
@@ -7,6 +7,7 @@ class SellerSelectable extends Component {
     super(props)
     this.state = {
       seller: props.seller,
+      actions: props.actions,
     }
   }
 
@@ -35,6 +36,7 @@ class SellerSelectable extends Component {
           ))}
           {this.props.children}
         </CardText>
+        <CardActions expandable={!!this.state.actions}>{this.state.actions}</CardActions>
       </Card>
     )
   }

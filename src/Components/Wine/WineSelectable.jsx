@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { Card, CardHeader, CardText } from 'material-ui'
-import { getHexColor } from '../../Utils/wineUtil'
-import { BerryChip } from '../Berry/BerryChip'
+import {Card, CardHeader, CardText, FlatButton} from 'material-ui'
+import {getHexColor} from '../../Utils/wineUtil'
+import {BerryChip} from '../Berry/BerryChip'
 
 class WineSelectable extends Component {
   constructor(props) {
@@ -33,31 +33,32 @@ class WineSelectable extends Component {
   render() {
     return (
       <Card>
-        <CardHeader
-          title={this.state.wine.name}
-          subtitle={this.wineToString()}
-          actAsExpander={!!this.props.children}
-          showExpandableButton={!!this.props.children}
-          titleColor={getHexColor(this.state.wine.color)}
-        >
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-            }}
+          <CardHeader
+            title={this.state.wine.name}
+            subtitle={this.wineToString()}
+            actAsExpander={!!this.props.children}
+            showExpandableButton={!!this.props.children}
+            titleColor={getHexColor(this.state.wine.color)}
           >
-            {this.state.wine.berries.map(berry => (
-              <BerryChip berry={berry} key={'WineSelectable/' + berry.id} />
-            ))}
-          </div>
-        </CardHeader>
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+              }}
+            >
+              {this.state.wine.berries.map(berry => (
+                <BerryChip berry={berry} key={'WineSelectable/' + berry.id}/>
+              ))}
+            </div>
+          </CardHeader>
         <CardText expandable={true}>{this.props.children}</CardText>
       </Card>
     )
   }
 }
 
-WineSelectable.propTypes = {
+WineSelectable
+  .propTypes = {
   wine: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string.isRequired,
@@ -70,4 +71,6 @@ WineSelectable.propTypes = {
   }).isRequired,
 }
 
-export { WineSelectable }
+export {
+  WineSelectable
+}

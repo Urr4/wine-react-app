@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { SellerSelectable } from '../Components/Seller/SellerSelectable'
-import { Dialog, FlatButton, List, ListItem, Paper } from 'material-ui'
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
-import { SellerForm } from '../Components/Seller/SellerForm'
+import React, {Component} from 'react'
+import {SellerSelectable} from '../Components/Seller/SellerSelectable'
+import {Dialog, Divider, FlatButton, List, ListItem, Paper} from 'material-ui'
+import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
+import {SellerForm} from '../Components/Seller/SellerForm'
 import WineView from './WineView'
 import WineCounterList from '../Components/Wine/WineCounterList'
 
@@ -61,29 +61,28 @@ class SellerView extends Component {
       center = [this.state.selectedSeller.lat, this.state.selectedSeller.lng]
     }
 
-    const editActions = [
-      <FlatButton label="Bestellen" primary={true} onClick={() => ({})} />,
-      <FlatButton label="Abbrechen" primary={true} keyboardFocused={true} onClick={() => ({})} />,
-    ]
-    const orderActions = [
-      <FlatButton label="Bestellen" primary={true} onClick={() => ({})} />,
-      <FlatButton label="Abbrechen" primary={true} keyboardFocused={true} onClick={() => ({})} />,
-    ]
+    const editActions = [<FlatButton label="Speichern" primary={true} onClick={() => ({})}/>]
+    const orderActions = [<FlatButton label="Bestellen" primary={true} onClick={() => ({})}/>]
 
     return (
-      <div style={{ display: 'flex' }}>
+      <div style={{display: 'flex'}}>
+
         <Dialog
           title={'Editiere ' + this.state.editSeller.name}
           actions={editActions}
           modal={false}
           open={!!this.state.editSeller}
           autoScrollBodyContent={true}
-          onRequestClose={() => ({
-            //TODO
-          })}
+          onRequestClose={() =>
+            this.setState(oldState => ({
+              editSeller: false,
+            }))
+          }
         >
-          <SellerForm seller={this.state.editSeller} />
-          <WineView wines={this.state.editSeller.wines} />
+          <SellerForm seller={this.state.editSeller}/>
+          <Divider/>
+          <WineView wines={this.state.editSeller.wines}/>
+          <FlatButton primary={true} label={'Wein hinzufügen'}/>
         </Dialog>
 
         <Dialog
@@ -92,11 +91,13 @@ class SellerView extends Component {
           modal={false}
           open={!!this.state.orderSeller}
           autoScrollBodyContent={true}
-          onRequestClose={() => ({
-            //TODO
-          })}
+          onRequestClose={() =>
+            this.setState(oldState => ({
+              orderSeller: false,
+            }))
+          }
         >
-          <WineCounterList wines={this.state.orderSeller.wines} />
+          <WineCounterList wines={this.state.orderSeller.wines}/>
         </Dialog>
 
         <Paper style={this.style}>
@@ -107,7 +108,7 @@ class SellerView extends Component {
                 disableTouchRipple={true}
                 onClick={this.onSellerClick(seller)}
               >
-                <SellerSelectable seller={seller} />
+                <SellerSelectable seller={seller}/>
                 <FlatButton onClick={this.openSellerForm(seller)}>Edit</FlatButton>
                 <FlatButton onClick={this.openOrderForm(seller)}>Order</FlatButton>
               </ListItem>
@@ -120,7 +121,7 @@ class SellerView extends Component {
               attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
               url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
             />
-            <div style={{ height: 500 }}>
+            <div style={{height: 500}}>
               {markers.map((marker, index) => (
                 <Marker position={marker.position} key={`marker_${index}`}>
                   <Popup>
