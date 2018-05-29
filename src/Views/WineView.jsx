@@ -8,6 +8,8 @@ class WineView extends Component {
     super(props)
     this.state = {
       wines: props.wines,
+      isWineDeletable: props.isWineDeletable,
+      isWineEditable: props.isWineEditable
     }
   }
 
@@ -16,8 +18,8 @@ class WineView extends Component {
       <List>
         {this.state.wines.map(wine => (
           <ListItem key={'WineView/' + wine.id} disableTouchRipple={true}>
-            <WineSelectable wine={wine}>
-              <WineForm wine={wine} />
+            <WineSelectable wine={wine} isDeletable={this.state.isWineDeletable}>
+              {this.state.isWineEditable && <WineForm wine={wine} />}
             </WineSelectable>
           </ListItem>
         ))}

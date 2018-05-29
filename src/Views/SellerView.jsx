@@ -81,7 +81,7 @@ class SellerView extends Component {
         >
           <SellerForm seller={this.state.editSeller}/>
           <Divider/>
-          <WineView wines={this.state.editSeller.wines}/>
+          <WineView wines={this.state.editSeller.wines} isWineDeletable={true} isWineEditable={true}/>
           <FlatButton primary={true} label={'Wein hinzufügen'}/>
         </Dialog>
 
