@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {Card, CardHeader, CardText, FlatButton} from 'material-ui'
+import {Card, CardHeader, CardText, Dialog, FlatButton} from 'material-ui'
 import {getHexColor} from '../../Utils/wineUtil'
 import {BerryChip} from '../Berry/BerryChip'
 
@@ -9,9 +9,13 @@ class WineSelectable extends Component {
     super(props)
     this.state = {
       wine: props.wine,
+      isDeletable: !!props.isDeletable ? props.isDeletable : false,
+      deleteConfirmationOpened: false
     }
 
     this.wineToString = this.wineToString.bind(this)
+    this.switchDeleteConfirmation = this.switchDeleteConfirmation.bind(this)
+    this.deleteWine = this.deleteWine.bind(this)
   }
 
   wineToString() {
@@ -30,9 +34,33 @@ class WineSelectable extends Component {
     )
   }
 
+  switchDeleteConfirmation() {
+    this.setState(() => ({
+      deleteConfirmationOpened: !this.state.deleteConfirmationOpened
+    }))
+  }
+
+  deleteWine() {
+    console.log("Deleting Wine ", this.state.wine)
+    //TODO REST-call
+  }
+
   render() {
     return (
-      <Card>
+      <div>
+        <Dialog
+          modal={false}
+          open={this.state.deleteConfirmationOpened}
+          actions={[
+            <FlatButton label="Ja" secondary={true} onClick={this.deleteWine}/>,
+            <FlatButton label="Nein" secondary={true} onClick={this.switchDeleteConfirmation}/>
+          ]}
+          onRequestClose={this.switchDeleteConfirmation}
+        >
+          <p>Wein {this.state.wine.name} wirklich löschen?</p>
+        </Dialog>
+
+        <Card>
           <CardHeader
             title={this.state.wine.name}
             subtitle={this.wineToString()}
@@ -40,6 +68,9 @@ class WineSelectable extends Component {
             showExpandableButton={!!this.props.children}
             titleColor={getHexColor(this.state.wine.color)}
           >
+            {this.state.isDeletable &&
+            <FlatButton secondary={true} label='Löschen' onClick={this.switchDeleteConfirmation}></FlatButton>
+            }
             <div
               style={{
                 display: 'flex',
@@ -51,8 +82,9 @@ class WineSelectable extends Component {
               ))}
             </div>
           </CardHeader>
-        <CardText expandable={true}>{this.props.children}</CardText>
-      </Card>
+          <CardText expandable={true}>{this.props.children}</CardText>
+        </Card>
+      </div>
     )
   }
 }

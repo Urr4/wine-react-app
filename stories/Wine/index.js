@@ -52,6 +52,11 @@ export default storiesOf =>
       </WineSelectable>
     ))
 
+    .add('Deletable WineSelectable', () => (
+      <WineSelectable wine={redwine} isDeletable={true}>
+      </WineSelectable>
+    ))
+
     .add('WineView', () => (
       <WineView wines={wines}/>
     ))
