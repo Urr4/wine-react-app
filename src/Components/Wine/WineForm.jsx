@@ -5,7 +5,11 @@ import PropTypes from 'prop-types'
 class WineForm extends Component {
   constructor(props) {
     super(props)
-    this.state = { wine: props.wine }
+    this.state = {
+      wine: props.wine,
+      isSaveable: props.isSaveable
+    }
+    console.log(this.state)
   }
 
   render() {
@@ -45,23 +49,37 @@ class WineForm extends Component {
           defaultValue={this.state.wine.price}
         />
         <br />
-        <FlatButton primary={true}>Save</FlatButton>
+        {this.state.isSaveable && <FlatButton primary label="Save"/>}
       </div>
     )
   }
 }
 
+WineForm.defaultProps = {
+  wine: {
+    name: '',
+    alcohol: 0,
+    acid: 0,
+    restSugar: 0,
+    bottleSize: 0,
+    price: 0,
+    color: ''
+  },
+  isSaveable: true
+}
+
 WineForm.propTypes = {
   wine: PropTypes.shape({
     id: PropTypes.number,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     alcohol: PropTypes.number,
     acid: PropTypes.number,
     restSugar: PropTypes.number,
     bottleSize: PropTypes.number,
     price: PropTypes.number,
-    color: PropTypes.string.isRequired,
-  }).isRequired,
+    color: PropTypes.string,
+  }),
+  isSaveable: PropTypes.bool
 }
 
 export default WineForm

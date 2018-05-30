@@ -6,7 +6,6 @@
     "lat": 52.499040,
     "lng": 13.418392,
     "email": "muster@mann.de",
-    "isActive": true,
     "wines": [
       {
         "id": 0,
@@ -65,7 +64,6 @@
     "lat": 51.399040,
     "lng": 11.428392,
     "email": "muster@mann.de",
-    "isActive": true,
     "wines": [
       {
         "id": 0,
@@ -108,7 +106,6 @@
     "lat": 50.300040,
     "lng": 12.411192,
     "email": "muster@mann.de",
-    "isActive": false,
     "wines": [
       {
         "id": 1,

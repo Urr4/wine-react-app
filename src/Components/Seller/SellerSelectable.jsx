@@ -13,14 +13,6 @@ class SellerSelectable extends Component {
     }
   }
 
-  getColor() {
-    if (this.state.seller.isActive) {
-      return '#FFFFFF'
-    } else {
-      return '#bbbbbb'
-    }
-  }
-
   render() {
     return (
       <Card>
@@ -29,9 +21,7 @@ class SellerSelectable extends Component {
           subtitle={this.state.seller.email}
           actAsExpander={true}
           showExpandableButton={true}
-          style={{ backgroundColor: this.getColor() }}
         />
-        <Divider />
         <CardText expandable={true}>
           {this.state.seller.wines.map(wine => (
             <WineSelectable key={'SellerSelectable/' + wine.id} wine={wine} isDeletable={this.state.isWineDeletable} />
