@@ -1,33 +1,37 @@
+import config from '../../config/config.json'
+
 const orderRoot = 'orders'
 
 export const OrderResource = () => {
-
   const getAllOrder = () => {
-    return fetch(`${TODO}/${orderRoot}`, {
-      method: 'GET'
-    })
-      .then(response => response.json())
+    return fetch(`${config.backend_url}/${orderRoot}`, {
+      method: 'GET',
+    }).then(response => response.json())
   }
 
-  const getOrderById = (id) => {
-    return fetch (`${TODO}/${orderRoot}/${id}`, {
-      method: 'GET'
-    })
-      .then(response => response.json())
+  const getOrderById = id => {
+    return fetch(`${config.backend_url}/${orderRoot}/${id}`, {
+      method: 'GET',
+    }).then(response => response.json())
   }
 
-  const updateOrder = (order) => {
-    return fetch (`${TODO}/${orderRoot}/`, {
+  const updateOrder = order => {
+    return fetch(`${config.backend_url}/${orderRoot}/`, {
       method: 'PUT',
-      body: order
-    })
-      .then(response => response.json())
+      body: order,
+    }).then(response => response.json())
   }
 
-  const saveOrder = (order) => {
-    return fetch (`${TODO}/${orderRoot}/`, {
+  const saveOrder = order => {
+    return fetch(`${config.backend_url}/${orderRoot}/`, {
       method: 'POST',
-      body: order
+      body: order,
+    })
+  }
+
+  const deactivateOrder = id => {
+    return fetch(`${config.backend_url}/${orderRoot}/${id}`, {
+      method: 'DELETE',
     })
   }
 }

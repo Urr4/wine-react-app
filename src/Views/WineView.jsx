@@ -9,7 +9,7 @@ class WineView extends Component {
     this.state = {
       wines: props.wines,
       isWineDeletable: props.isWineDeletable,
-      isWineEditable: props.isWineEditable
+      isWineEditable: props.isWineEditable,
     }
   }
 

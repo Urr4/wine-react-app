@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
-import {SellerSelectable} from '../Components/Seller/SellerSelectable'
-import {Dialog, Divider, FlatButton, List, ListItem, Paper} from 'material-ui'
-import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
-import {SellerForm} from '../Components/Seller/SellerForm'
+import React, { Component } from 'react'
+import { SellerSelectable } from '../Components/Seller/SellerSelectable'
+import { Dialog, Divider, FlatButton, List, ListItem, Paper } from 'material-ui'
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import { SellerForm } from '../Components/Seller/SellerForm'
 import WineView from './WineView'
 import WineCounterList from '../Components/Wine/WineCounterList'
-import WineForm from "../Components/Wine/WineForm";
+import WineForm from '../Components/Wine/WineForm'
 
 class SellerView extends Component {
   constructor(props) {
@@ -41,13 +41,13 @@ class SellerView extends Component {
     if (!!this.editSeller) {
       return () => {
         this.setState(() => ({
-          editSeller: false
+          editSeller: false,
         }))
       }
     } else {
       return () => {
         this.setState(() => ({
-          editSeller: seller
+          editSeller: seller,
         }))
       }
     }
@@ -57,13 +57,13 @@ class SellerView extends Component {
     if (!!this.orderSeller) {
       return () => {
         this.setState(() => ({
-          orderSeller: false
+          orderSeller: false,
         }))
       }
     } else {
       return () => {
         this.setState(() => ({
-          orderSeller: seller
+          orderSeller: seller,
         }))
       }
     }
@@ -71,7 +71,7 @@ class SellerView extends Component {
 
   switchAddWine() {
     this.setState(() => ({
-      isAddWineOpen: !this.isAddWineOpen
+      isAddWineOpen: !this.isAddWineOpen,
     }))
   }
 
@@ -90,21 +90,20 @@ class SellerView extends Component {
     }
 
     const editActions = [
-      <FlatButton label="Speichern" primary onClick={() => ({})}/>,
-      <FlatButton label="Abbrechen" secondary onClick={this.switchEditSeller()}/>
+      <FlatButton label="Speichern" primary onClick={() => ({})} />,
+      <FlatButton label="Abbrechen" secondary onClick={this.switchEditSeller()} />,
     ]
     const orderActions = [
-      <FlatButton label="Bestellen" primary={true} onClick={() => ({})}/>,
-      <FlatButton label="Abbrechen" secondary onClick={this.switchOrderSeller()}/>
+      <FlatButton label="Bestellen" primary={true} onClick={() => ({})} />,
+      <FlatButton label="Abbrechen" secondary onClick={this.switchOrderSeller()} />,
     ]
     const addActions = [
-      <FlatButton label="Speichern" primary={true} onClick={() => ({})}/>,
-      <FlatButton label="Abbrechen" secondary onClick={this.switchAddWine}/>
+      <FlatButton label="Speichern" primary={true} onClick={() => ({})} />,
+      <FlatButton label="Abbrechen" secondary onClick={this.switchAddWine} />,
     ]
 
     return (
-      <div style={{display: 'flex'}}>
-
+      <div style={{ display: 'flex' }}>
         <Dialog
           title={'Editiere ' + this.state.editSeller.name}
           actions={editActions}
@@ -114,10 +113,14 @@ class SellerView extends Component {
           autoScrollBodyContent={true}
           onRequestClose={this.switchEditSeller()}
         >
-          <SellerForm seller={this.state.editSeller}/>
-          <Divider/>
-          <WineView wines={this.state.editSeller.wines} isWineDeletable={true} isWineEditable={true}/>
-          <FlatButton primary={true} label='Wein hinzufügen' onClick={this.switchAddWine}/>
+          <SellerForm seller={this.state.editSeller} />
+          <Divider />
+          <WineView
+            wines={this.state.editSeller.wines}
+            isWineDeletable={true}
+            isWineEditable={true}
+          />
+          <FlatButton primary={true} label="Wein hinzufügen" onClick={this.switchAddWine} />
         </Dialog>
 
         <Dialog
@@ -129,7 +132,7 @@ class SellerView extends Component {
           autoDetectWindowHeight={true}
           onRequestClose={this.switchOrderSeller()}
         >
-          <WineCounterList wines={this.state.orderSeller.wines}/>
+          <WineCounterList wines={this.state.orderSeller.wines} />
         </Dialog>
 
         <Dialog
@@ -141,7 +144,7 @@ class SellerView extends Component {
           autoDetectWindowHeight={true}
           onRequestClose={this.switchAddWine}
         >
-          <WineForm isSaveable={false}/>
+          <WineForm isSaveable={false} />
         </Dialog>
 
         <Paper style={this.style}>
@@ -152,9 +155,9 @@ class SellerView extends Component {
                 disableTouchRipple={true}
                 onClick={this.onSellerClick(seller)}
               >
-                <SellerSelectable seller={seller}/>
-                <FlatButton onClick={this.switchEditSeller(seller)} label="Edit"/>
-                <FlatButton onClick={this.switchOrderSeller(seller)} label="Order"/>
+                <SellerSelectable seller={seller} />
+                <FlatButton onClick={this.switchEditSeller(seller)} label="Edit" />
+                <FlatButton onClick={this.switchOrderSeller(seller)} label="Order" />
               </ListItem>
             ))}
           </List>
@@ -165,7 +168,7 @@ class SellerView extends Component {
               attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
               url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
             />
-            <div style={{height: 500}}>
+            <div style={{ height: 500 }}>
               {markers.map((marker, index) => (
                 <Marker position={marker.position} key={`marker_${index}`}>
                   <Popup>

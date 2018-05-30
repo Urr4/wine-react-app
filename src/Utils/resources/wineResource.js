@@ -1,33 +1,37 @@
+import config from '../../config/config.json'
+
 const wineRoot = 'wines'
 
 export const WineResource = () => {
-
   const getAllWine = () => {
-    return fetch(`${TODO}/${wineRoot}`, {
-      method: 'GET'
-    })
-      .then(response => response.json())
+    return fetch(`${config.backend_url}/${wineRoot}`, {
+      method: 'GET',
+    }).then(response => response.json())
   }
 
-  const getWineById = (id) => {
-    return fetch (`${TODO}/${wineRoot}/${id}`, {
-      method: 'GET'
-    })
-      .then(response => response.json())
+  const getWineById = id => {
+    return fetch(`${config.backend_url}/${wineRoot}/${id}`, {
+      method: 'GET',
+    }).then(response => response.json())
   }
 
-  const updateWine = (wine) => {
-    return fetch (`${TODO}/${wineRoot}/`, {
+  const updateWine = wine => {
+    return fetch(`${config.backend_url}/${wineRoot}/`, {
       method: 'PUT',
-      body: wine
-    })
-      .then(response => response.json())
+      body: wine,
+    }).then(response => response.json())
   }
 
-  const saveWine = (wine) => {
-    return fetch (`${TODO}/${wineRoot}/`, {
+  const saveWine = wine => {
+    return fetch(`${config.backend_url}/${wineRoot}/`, {
       method: 'POST',
-      body: wine
+      body: wine,
+    })
+  }
+
+  const deactivateWine = (id) => {
+    return fetch(`${config.backend_url}/${wineRoot}/${id}`, {
+      method: 'DELETE',
     })
   }
 }

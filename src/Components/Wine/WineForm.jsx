@@ -7,7 +7,7 @@ class WineForm extends Component {
     super(props)
     this.state = {
       wine: props.wine,
-      isSaveable: props.isSaveable
+      isSaveable: props.isSaveable,
     }
     console.log(this.state)
   }
@@ -49,7 +49,7 @@ class WineForm extends Component {
           defaultValue={this.state.wine.price}
         />
         <br />
-        {this.state.isSaveable && <FlatButton primary label="Save"/>}
+        {this.state.isSaveable && <FlatButton primary label="Save" />}
       </div>
     )
   }
@@ -63,9 +63,9 @@ WineForm.defaultProps = {
     restSugar: 0,
     bottleSize: 0,
     price: 0,
-    color: ''
+    color: '',
   },
-  isSaveable: true
+  isSaveable: true,
 }
 
 WineForm.propTypes = {
@@ -79,7 +79,7 @@ WineForm.propTypes = {
     price: PropTypes.number,
     color: PropTypes.string,
   }),
-  isSaveable: PropTypes.bool
+  isSaveable: PropTypes.bool,
 }
 
 export default WineForm

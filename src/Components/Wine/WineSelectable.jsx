@@ -1,8 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {Card, CardHeader, CardText, Dialog, FlatButton} from 'material-ui'
-import {getHexColor} from '../../Utils/wineUtil'
-import {BerryChip} from '../Berry/BerryChip'
+import { Card, CardHeader, CardText, Dialog, FlatButton } from 'material-ui'
+import { getHexColor } from '../../Utils/wineUtil'
+import { BerryChip } from '../Berry/BerryChip'
+import { WineResource } from '../../Utils/resources/wineResource'
 
 class WineSelectable extends Component {
   constructor(props) {
@@ -10,12 +11,12 @@ class WineSelectable extends Component {
     this.state = {
       wine: props.wine,
       isDeletable: !!props.isDeletable ? props.isDeletable : false,
-      deleteConfirmationOpened: false
+      deleteConfirmationOpened: false,
     }
 
     this.wineToString = this.wineToString.bind(this)
     this.switchDeleteConfirmation = this.switchDeleteConfirmation.bind(this)
-    this.deleteWine = this.deleteWine.bind(this)
+    this.deleteWineConfirmed = this.deleteWineConfirmed.bind(this)
   }
 
   wineToString() {
@@ -36,13 +37,12 @@ class WineSelectable extends Component {
 
   switchDeleteConfirmation() {
     this.setState(() => ({
-      deleteConfirmationOpened: !this.state.deleteConfirmationOpened
+      deleteConfirmationOpened: !this.state.deleteConfirmationOpened,
     }))
   }
 
-  deleteWine() {
-    console.log("Deleting Wine ", this.state.wine)
-    //TODO REST-call
+  deleteWineConfirmed() {
+    WineResource.deactivateWine(this.state.wine.id).then(() => this.switchDeleteConfirmation())
   }
 
   render() {
@@ -52,8 +52,8 @@ class WineSelectable extends Component {
           modal={false}
           open={this.state.deleteConfirmationOpened}
           actions={[
-            <FlatButton label="Ja" secondary={true} onClick={this.deleteWine}/>,
-            <FlatButton label="Nein" secondary={true} onClick={this.switchDeleteConfirmation}/>
+            <FlatButton label="Ja" secondary={true} onClick={this.deleteWineConfirmed} />,
+            <FlatButton label="Nein" secondary={true} onClick={this.switchDeleteConfirmation} />,
           ]}
           onRequestClose={this.switchDeleteConfirmation}
         >
@@ -68,9 +68,13 @@ class WineSelectable extends Component {
             showExpandableButton={!!this.props.children}
             titleColor={getHexColor(this.state.wine.color)}
           >
-            {this.state.isDeletable &&
-            <FlatButton secondary={true} label='Löschen' onClick={this.switchDeleteConfirmation}></FlatButton>
-            }
+            {this.state.isDeletable && (
+              <FlatButton
+                secondary={true}
+                label="Löschen"
+                onClick={this.switchDeleteConfirmation}
+              />
+            )}
             <div
               style={{
                 display: 'flex',
@@ -78,7 +82,7 @@ class WineSelectable extends Component {
               }}
             >
               {this.state.wine.berries.map(berry => (
-                <BerryChip berry={berry} key={'WineSelectable/' + berry.id}/>
+                <BerryChip berry={berry} key={'WineSelectable/' + berry.id} />
               ))}
             </div>
           </CardHeader>
@@ -89,8 +93,7 @@ class WineSelectable extends Component {
   }
 }
 
-WineSelectable
-  .propTypes = {
+WineSelectable.propTypes = {
   wine: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string.isRequired,
@@ -103,6 +106,4 @@ WineSelectable
   }).isRequired,
 }
 
-export {
-  WineSelectable
-}
+export { WineSelectable }

@@ -9,7 +9,7 @@ class SellerSelectable extends Component {
       seller: props.seller,
       actions: props.actions,
       isWineDeletable: props.isWineDeletable,
-      isWineEditable: props.isWineEditable
+      isWineEditable: props.isWineEditable,
     }
   }
 
@@ -24,7 +24,11 @@ class SellerSelectable extends Component {
         />
         <CardText expandable={true}>
           {this.state.seller.wines.map(wine => (
-            <WineSelectable key={'SellerSelectable/' + wine.id} wine={wine} isDeletable={this.state.isWineDeletable} />
+            <WineSelectable
+              key={'SellerSelectable/' + wine.id}
+              wine={wine}
+              isDeletable={this.state.isWineDeletable}
+            />
           ))}
           {this.props.children}
         </CardText>
