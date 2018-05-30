@@ -1,3 +1,4 @@
 {
-  "backend_url": "http://localhost:8080/drinkmanager"
+  "backend_url": "http://localhost:8080/drinkmanager",
+  "mapbox_token": "pk.eyJ1IjoidXJyNCIsImEiOiJjaXJva2U5bnUwMDdqaHFtMWoycGFmOWg2In0.dgw0RHCrjMznWrSIDgCcGA"
 }

@@ -6,6 +6,7 @@ import { SellerForm } from '../Components/Seller/SellerForm'
 import WineView from './WineView'
 import WineCounterList from '../Components/Wine/WineCounterList'
 import WineForm from '../Components/Wine/WineForm'
+import config from '../config/config.json'
 
 class SellerView extends Component {
   constructor(props) {
@@ -165,8 +166,9 @@ class SellerView extends Component {
         <Paper style={this.style}>
           <Map center={center} zoom={13} className="map__reactleaflet">
             <TileLayer
-              attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-              url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+              url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={token}"
+              id="mapbox.satellite"
+              token={config.mapbox_token}
             />
             <div style={{ height: 500 }}>
               {markers.map((marker, index) => (
