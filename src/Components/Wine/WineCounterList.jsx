@@ -6,7 +6,7 @@ class WineCounterList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      wines: !!props.wines ? props.wines : [],
+      wines: props.wines ? props.wines : [],
     }
   }
 
@@ -14,7 +14,7 @@ class WineCounterList extends Component {
     return (
       <List>
         {this.state.wines.map(wine => (
-          <ListItem key={'WineCounterList/' + wine.id} disableTouchRipple={true}>
+          <ListItem key={'WineCounterList/' + wine.id} disableTouchRipple>
             <WineCounter wine={wine} />
           </ListItem>
         ))}

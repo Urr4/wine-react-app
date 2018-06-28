@@ -10,7 +10,7 @@ class WineSelectable extends Component {
     super(props)
     this.state = {
       wine: props.wine,
-      isDeletable: !!props.isDeletable ? props.isDeletable : false,
+      isDeletable: props.isDeletable ? props.isDeletable : false,
       deleteConfirmationOpened: false,
     }
 
@@ -52,8 +52,8 @@ class WineSelectable extends Component {
           modal={false}
           open={this.state.deleteConfirmationOpened}
           actions={[
-            <FlatButton label="Ja" secondary={true} onClick={this.deleteWineConfirmed} />,
-            <FlatButton label="Nein" secondary={true} onClick={this.switchDeleteConfirmation} />,
+            <FlatButton label="Ja" secondary onClick={this.deleteWineConfirmed} />,
+            <FlatButton label="Nein" secondary onClick={this.switchDeleteConfirmation} />,
           ]}
           onRequestClose={this.switchDeleteConfirmation}
         >
@@ -69,11 +69,7 @@ class WineSelectable extends Component {
             titleColor={getHexColor(this.state.wine.color)}
           >
             {this.state.isDeletable && (
-              <FlatButton
-                secondary={true}
-                label="Löschen"
-                onClick={this.switchDeleteConfirmation}
-              />
+              <FlatButton secondary label="Löschen" onClick={this.switchDeleteConfirmation} />
             )}
             <div
               style={{
@@ -86,7 +82,7 @@ class WineSelectable extends Component {
               ))}
             </div>
           </CardHeader>
-          <CardText expandable={true}>{this.props.children}</CardText>
+          <CardText expandable>{this.props.children}</CardText>
         </Card>
       </div>
     )

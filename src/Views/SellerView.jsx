@@ -7,6 +7,7 @@ import WineView from './WineView'
 import WineCounterList from '../Components/Wine/WineCounterList'
 import WineForm from '../Components/Wine/WineForm'
 import config from '../config/config.json'
+import { SellerResource } from '../Utils/resources/sellerResource'
 
 class SellerView extends Component {
   constructor(props) {
@@ -25,48 +26,46 @@ class SellerView extends Component {
       display: 'inline-block',
     }
 
-    this.switchEditSeller = this.switchEditSeller.bind(this)
-    this.switchOrderSeller = this.switchOrderSeller.bind(this)
     this.switchAddWine = this.switchAddWine.bind(this)
   }
 
   onSellerClick(seller) {
     return () => {
-      this.setState(oldState => ({
+      this.setState({
         selectedSeller: seller,
+      })
+    }
+  }
+
+  setEditSeller(seller) {
+    return () => {
+      this.setState(() => ({
+        editSeller: seller,
       }))
     }
   }
 
-  switchEditSeller(seller) {
-    if (!!this.editSeller) {
-      return () => {
-        this.setState(() => ({
-          editSeller: false,
-        }))
-      }
-    } else {
-      return () => {
-        this.setState(() => ({
-          editSeller: seller,
-        }))
-      }
+  voidEditSeller() {
+    return () => {
+      this.setState(() => ({
+        editSeller: false,
+      }))
     }
   }
 
-  switchOrderSeller(seller) {
-    if (!!this.orderSeller) {
-      return () => {
-        this.setState(() => ({
-          orderSeller: false,
-        }))
-      }
-    } else {
-      return () => {
-        this.setState(() => ({
-          orderSeller: seller,
-        }))
-      }
+  voidOrderSeller() {
+    return () => {
+      this.setState(() => ({
+        orderSeller: false,
+      }))
+    }
+  }
+
+  setOrderSeller(seller) {
+    return () => {
+      this.setState(() => ({
+        orderSeller: seller,
+      }))
     }
   }
 
@@ -79,7 +78,7 @@ class SellerView extends Component {
   render() {
     const markers = []
     let center = [52.527404, 13.380759]
-    if (!!this.state.selectedSeller) {
+    if (this.state.selectedSeller) {
       markers.push({
         position: {
           lat: this.state.selectedSeller.lat,
@@ -91,15 +90,19 @@ class SellerView extends Component {
     }
 
     const editActions = [
-      <FlatButton label="Speichern" primary onClick={() => ({})} />,
-      <FlatButton label="Abbrechen" secondary onClick={this.switchEditSeller()} />,
+      <FlatButton
+        label="Speichern"
+        primary
+        onClick={SellerResource.updateSeller(this.state.editSeller)}
+      />,
+      <FlatButton label="Abbrechen" secondary onClick={this.voidEditSeller()} />,
     ]
     const orderActions = [
-      <FlatButton label="Bestellen" primary={true} onClick={() => ({})} />,
-      <FlatButton label="Abbrechen" secondary onClick={this.switchOrderSeller()} />,
+      <FlatButton label="Bestellen" primary onClick={() => ({})} />,
+      <FlatButton label="Abbrechen" secondary onClick={this.voidOrderSeller()} />,
     ]
     const addActions = [
-      <FlatButton label="Speichern" primary={true} onClick={() => ({})} />,
+      <FlatButton label="Speichern" primary onClick={() => ({})} />,
       <FlatButton label="Abbrechen" secondary onClick={this.switchAddWine} />,
     ]
 
@@ -110,18 +113,15 @@ class SellerView extends Component {
           actions={editActions}
           modal={false}
           open={!!this.state.editSeller}
-          autoDetectWindowHeight={true}
-          autoScrollBodyContent={true}
-          onRequestClose={this.switchEditSeller()}
+          autoDetectWindowHeight
+          autoScrollBodyContent
+          onRequestClose={this.voidEditSeller()}
         >
           <SellerForm seller={this.state.editSeller} />
           <Divider />
-          <WineView
-            wines={this.state.editSeller.wines}
-            isWineDeletable={true}
-            isWineEditable={true}
-          />
-          <FlatButton primary={true} label="Wein hinzufügen" onClick={this.switchAddWine} />
+          /* TODO dont use WineView, use List of augmented WineSelectables instead */
+          <WineView wines={this.state.editSeller.wines} wineDeletable wineEditable />
+          <FlatButton primary label="Wein hinzufügen" onClick={this.switchAddWine} />
         </Dialog>
 
         <Dialog
@@ -129,9 +129,9 @@ class SellerView extends Component {
           actions={orderActions}
           modal={false}
           open={!!this.state.orderSeller}
-          autoScrollBodyContent={true}
-          autoDetectWindowHeight={true}
-          onRequestClose={this.switchOrderSeller()}
+          autoScrollBodyContent
+          autoDetectWindowHeight
+          onRequestClose={this.voidOrderSeller()}
         >
           <WineCounterList wines={this.state.orderSeller.wines} />
         </Dialog>
@@ -141,8 +141,8 @@ class SellerView extends Component {
           actions={addActions}
           modal={false}
           open={!!this.state.isAddWineOpen}
-          autoScrollBodyContent={true}
-          autoDetectWindowHeight={true}
+          autoScrollBodyContent
+          autoDetectWindowHeight
           onRequestClose={this.switchAddWine}
         >
           <WineForm isSaveable={false} />
@@ -153,12 +153,12 @@ class SellerView extends Component {
             {this.state.sellers.map(seller => (
               <ListItem
                 key={'SellerView/' + seller.id}
-                disableTouchRipple={true}
+                disableTouchRipple
                 onClick={this.onSellerClick(seller)}
               >
                 <SellerSelectable seller={seller} />
-                <FlatButton onClick={this.switchEditSeller(seller)} label="Edit" />
-                <FlatButton onClick={this.switchOrderSeller(seller)} label="Order" />
+                <FlatButton onClick={this.setEditSeller(seller)} label="Edit" />
+                <FlatButton onClick={this.setOrderSeller(seller)} label="Order" />
               </ListItem>
             ))}
           </List>

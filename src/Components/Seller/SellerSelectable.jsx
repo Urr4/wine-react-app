@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, CardText, CardTitle, CardActions, Divider } from 'material-ui'
+import { Card, CardText, CardTitle, CardActions } from 'material-ui'
 import { WineSelectable } from '../Wine/WineSelectable'
 
 class SellerSelectable extends Component {
@@ -19,10 +19,10 @@ class SellerSelectable extends Component {
         <CardTitle
           title={this.state.seller.name}
           subtitle={this.state.seller.email}
-          actAsExpander={true}
-          showExpandableButton={true}
+          actAsExpander
+          showExpandableButton
         />
-        <CardText expandable={true}>
+        <CardText expandable>
           {this.state.seller.wines.map(wine => (
             <WineSelectable
               key={'SellerSelectable/' + wine.id}

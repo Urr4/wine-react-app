@@ -4,6 +4,7 @@ import user from "./fixtures/user.json"
 import users from "./fixtures/users.json"
 import {MuiThemeProviderDecorator} from "../decorators";
 import UserView from "../../src/Views/UserView";
+import { action} from '@storybook/addon-actions';
 
 export default storiesOf =>
   storiesOf('Components/User', module)
@@ -11,7 +12,7 @@ export default storiesOf =>
     .add('UserChip', () => (
         <UserChip
           user={user}
-          onClick={()=>alert('Clicked')}
+          onClick={action('UserChip clicked')}
         />
     ))
 

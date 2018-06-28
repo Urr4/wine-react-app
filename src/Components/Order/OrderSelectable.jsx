@@ -26,18 +26,18 @@ class OrderSelectable extends Component {
         <CardHeader
           title={'Bestellung bei ' + this.state.order.seller.name}
           subtitle={this.state.order.fullPrice + '€, davon ' + this.state.order.porto + '€ Porto'}
-          actAsExpander={true}
-          showExpandableButton={true}
+          actAsExpander
+          showExpandableButton
         />
         <Divider />
-        <CardText expandable={true}>
+        <CardText expandable>
           <List>
             {this.state.order.orderedWines.map(orderedWine => {
               return (
                 <ListItem
                   key={'OrderSelectable/' + orderedWine.id}
                   primaryText={orderedWine.wine.name}
-                  disabled={true}
+                  disabled
                   leftAvatar={
                     <Avatar backgroundColor={getHexColor(orderedWine.wine.color)}>
                       {orderedWine.amountOfWine}
@@ -54,7 +54,7 @@ class OrderSelectable extends Component {
           </List>
         </CardText>
         <Divider />
-        <CardActions expandable={true}>
+        <CardActions expandable>
           <List>
             <ListItem leftCheckbox={<Checkbox />} primaryText={'Empfangen'} />
             <ListItem leftCheckbox={<Checkbox />} primaryText={'Bezahlt'} />

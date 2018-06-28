@@ -14,7 +14,7 @@ class OrderView extends Component {
     return (
       <List>
         {this.state.orders.map(order => (
-          <ListItem key={'OrderView/' + order.id} disableTouchRipple={true}>
+          <ListItem key={'OrderView/' + order.id} disableTouchRipple>
             <OrderSelectable order={order} />
           </ListItem>
         ))}

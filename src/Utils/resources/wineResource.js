@@ -29,7 +29,7 @@ export const WineResource = () => {
     })
   }
 
-  const deactivateWine = (id) => {
+  const deactivateWine = id => {
     return fetch(`${config.backend_url}/${wineRoot}/${id}`, {
       method: 'DELETE',
     })
