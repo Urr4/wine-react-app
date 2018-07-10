@@ -7,17 +7,11 @@ class BerryChip extends Component {
     this.state = {
       berry: props.berry,
     }
-
-    this.selected = this.selected.bind(this)
-  }
-
-  selected() {
-    alert('Clicked')
   }
 
   render() {
     return (
-      <Chip onClick={this.selected} backgroundColor={'#1dae41'} labelColor={'#ffffff'}>
+      <Chip backgroundColor={'#1dae41'} labelColor={'#ffffff'}>
         <Avatar
           icon={<FontIcon className="fab fa-pagelines" />}
           color={'#1DAE41'}

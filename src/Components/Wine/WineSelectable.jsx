@@ -1,22 +1,17 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Card, CardHeader, CardText, Dialog, FlatButton } from 'material-ui'
+import { Card, CardHeader, CardText } from 'material-ui'
 import { getHexColor } from '../../Utils/wineUtil'
 import { BerryChip } from '../Berry/BerryChip'
-import { WineResource } from '../../Utils/resources/wineResource'
 
-class WineSelectable extends Component {
+class WineSelectable extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
       wine: props.wine,
-      isDeletable: props.isDeletable ? props.isDeletable : false,
-      deleteConfirmationOpened: false,
     }
 
     this.wineToString = this.wineToString.bind(this)
-    this.switchDeleteConfirmation = this.switchDeleteConfirmation.bind(this)
-    this.deleteWineConfirmed = this.deleteWineConfirmed.bind(this)
   }
 
   wineToString() {
@@ -35,31 +30,9 @@ class WineSelectable extends Component {
     )
   }
 
-  switchDeleteConfirmation() {
-    this.setState(() => ({
-      deleteConfirmationOpened: !this.state.deleteConfirmationOpened,
-    }))
-  }
-
-  deleteWineConfirmed() {
-    WineResource.deactivateWine(this.state.wine.id).then(() => this.switchDeleteConfirmation())
-  }
-
   render() {
     return (
       <div>
-        <Dialog
-          modal={false}
-          open={this.state.deleteConfirmationOpened}
-          actions={[
-            <FlatButton label="Ja" secondary onClick={this.deleteWineConfirmed} />,
-            <FlatButton label="Nein" secondary onClick={this.switchDeleteConfirmation} />,
-          ]}
-          onRequestClose={this.switchDeleteConfirmation}
-        >
-          <p>Wein {this.state.wine.name} wirklich löschen?</p>
-        </Dialog>
-
         <Card>
           <CardHeader
             title={this.state.wine.name}
@@ -68,9 +41,6 @@ class WineSelectable extends Component {
             showExpandableButton={!!this.props.children}
             titleColor={getHexColor(this.state.wine.color)}
           >
-            {this.state.isDeletable && (
-              <FlatButton secondary label="Löschen" onClick={this.switchDeleteConfirmation} />
-            )}
             <div
               style={{
                 display: 'flex',

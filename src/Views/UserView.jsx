@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import UserChip from '../Components/User/UserChip'
-import { Dialog, FlatButton, List, ListItem } from 'material-ui'
+import { Dialog, FlatButton, List, ListItem, TextField } from 'material-ui'
 import WineView from './WineView'
 
 class UserView extends Component {
@@ -8,8 +8,10 @@ class UserView extends Component {
     super(props)
     this.state = {
       users: props.users,
+      filteredUsers: props.users,
       currentUser: false,
     }
+    this.filterUsers = this.filterUsers.bind(this)
   }
 
   voidCurrentUser() {
@@ -26,11 +28,19 @@ class UserView extends Component {
       })
   }
 
+  filterUsers(event) {
+    this.setState({
+      filteredUsers: this.state.users.filter(user =>
+        user.name.toLowerCase().includes(event.target.value.toLowerCase())
+      ),
+    })
+  }
+
   render() {
     const addWineAction = [<FlatButton label="+" primary onClick={() => alert('Click')} />]
 
     return (
-      <div style={{ display: 'flex' }}>
+      <div>
         <Dialog
           title={'Weine von ' + this.state.currentUser.name}
           actions={addWineAction}
@@ -47,13 +57,23 @@ class UserView extends Component {
           />
         </Dialog>
 
-        <List>
-          {this.state.users.map(user => (
-            <ListItem key={'UserView/' + user.id} disableTouchRipple>
-              <UserChip user={user} onClick={this.setCurrentUser(user)} />
-            </ListItem>
-          ))}
-        </List>
+        <div style={{ margin: 'auto', width: '50%' }}>
+          <TextField
+            id="UserView.TextField.Search"
+            onChange={this.filterUsers}
+            floatingLabelText="Suchen"
+            fullWidth
+          />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <List>
+            {this.state.filteredUsers.map(user => (
+              <ListItem key={'UserView/' + user.id} disableTouchRipple>
+                <UserChip user={user} onClick={this.setCurrentUser(user)} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
       </div>
     )
   }

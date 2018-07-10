@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, CardText, CardTitle, CardActions } from 'material-ui'
+import { Card, CardText, CardTitle } from 'material-ui'
 import { WineSelectable } from '../Wine/WineSelectable'
 
 class SellerSelectable extends Component {
@@ -7,9 +7,6 @@ class SellerSelectable extends Component {
     super(props)
     this.state = {
       seller: props.seller,
-      actions: props.actions,
-      isWineDeletable: props.isWineDeletable,
-      isWineEditable: props.isWineEditable,
     }
   }
 
@@ -24,15 +21,10 @@ class SellerSelectable extends Component {
         />
         <CardText expandable>
           {this.state.seller.wines.map(wine => (
-            <WineSelectable
-              key={'SellerSelectable/' + wine.id}
-              wine={wine}
-              isDeletable={this.state.isWineDeletable}
-            />
+            <WineSelectable key={'SellerSelectable/' + wine.id} wine={wine} />
           ))}
           {this.props.children}
         </CardText>
-        <CardActions expandable={!!this.state.actions}>{this.state.actions}</CardActions>
       </Card>
     )
   }

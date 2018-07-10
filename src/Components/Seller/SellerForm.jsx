@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TextField, FlatButton } from 'material-ui'
+import { TextField } from 'material-ui'
 
 class SellerForm extends Component {
   constructor(props) {
@@ -30,8 +30,6 @@ class SellerForm extends Component {
           defaultValue={this.state.seller.email}
           fullWidth
         />
-        <br />
-        <FlatButton primary>Save</FlatButton>
       </div>
     )
   }

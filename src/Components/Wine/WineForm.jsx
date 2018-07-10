@@ -1,15 +1,12 @@
-import React, { Component } from 'react'
-import { TextField, FlatButton } from 'material-ui'
-import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
+import { TextField } from 'material-ui'
 
-class WineForm extends Component {
+class WineForm extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
       wine: props.wine,
-      isSaveable: props.isSaveable,
     }
-    console.log(this.state)
   }
 
   render() {
@@ -48,8 +45,6 @@ class WineForm extends Component {
           floatingLabelText="Preis"
           defaultValue={this.state.wine.price}
         />
-        <br />
-        {this.state.isSaveable && <FlatButton primary label="Save" />}
       </div>
     )
   }
@@ -65,21 +60,6 @@ WineForm.defaultProps = {
     price: 0,
     color: '',
   },
-  isSaveable: true,
-}
-
-WineForm.propTypes = {
-  wine: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    alcohol: PropTypes.number,
-    acid: PropTypes.number,
-    restSugar: PropTypes.number,
-    bottleSize: PropTypes.number,
-    price: PropTypes.number,
-    color: PropTypes.string,
-  }),
-  isSaveable: PropTypes.bool,
 }
 
 export default WineForm

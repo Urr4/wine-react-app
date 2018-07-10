@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, ListItem, Dialog, FlatButton } from 'material-ui'
+import { Dialog, List, ListItem, TextField } from 'material-ui'
 import { WineSelectable } from '../Components/Wine/WineSelectable'
 import WineForm from '../Components/Wine/WineForm'
 
@@ -8,10 +8,10 @@ class WineView extends Component {
     super(props)
     this.state = {
       wines: props.wines,
-      isWineDeletable: props.wineDeletable,
-      isWineEditable: props.wineEditable,
+      filteredWines: props.wines,
       currentWine: false,
     }
+    this.filterWines = this.filterWines.bind(this)
   }
 
   voidCurrentWine() {
@@ -28,36 +28,73 @@ class WineView extends Component {
       })
   }
 
-  render() {
-    const addUserAction = [<FlatButton label="+" primary onClick={() => alert('Click')} />]
+  filterWines(event) {
+    this.setState({
+      filteredWines: this.state.wines.filter(wine =>
+        wine.name.toLowerCase().includes(event.target.value.toLowerCase())
+      ),
+    })
+  }
 
+  render() {
     return (
-      <div style={{ display: 'flex' }}>
+      <div>
+        <div style={{ margin: 'auto', width: '50%' }}>
+          <TextField
+            id="WineView.TextField.Search"
+            onChange={this.filterWines}
+            floatingLabelText="Suchen"
+            fullWidth
+          />
+        </div>
         <Dialog
           title={this.state.currentWine.name}
-          actions={addUserAction}
           modal={false}
           open={!!this.state.currentWine}
           autoDetectWindowHeight
           autoScrollBodyContent
           onRequestClose={this.voidCurrentWine()}
         >
-          <p>Test</p>
+          <WineForm wine={this.state.currentWine} />
         </Dialog>
 
-        <List>
-          {this.state.wines.map(wine => (
-            <ListItem
-              key={'WineView/' + wine.id}
-              disableTouchRipple
-              onClick={this.setCurrentWine(wine)}
-            >
-              <WineSelectable wine={wine} isDeletable={this.state.isWineDeletable}>
-                {this.state.isWineEditable && <WineForm wine={wine} />}
-              </WineSelectable>
-            </ListItem>
-          ))}
-        </List>
+        <div style={{ margin: 'auto', width: '90%', textAlign: 'center', display: 'flex' }}>
+          <List>
+            {this.state.filteredWines.filter(wine => wine.color === 'WHITE').map(wine => (
+              <ListItem
+                key={'WineView/' + wine.id}
+                disableTouchRipple
+                onClick={this.setCurrentWine(wine)}
+              >
+                <WineSelectable wine={wine} />
+              </ListItem>
+            ))}
+          </List>
+
+          <List>
+            {this.state.filteredWines.filter(wine => wine.color === 'RED').map(wine => (
+              <ListItem
+                key={'WineView/' + wine.id}
+                disableTouchRipple
+                onClick={this.setCurrentWine(wine)}
+              >
+                <WineSelectable wine={wine} />
+              </ListItem>
+            ))}
+          </List>
+
+          <List>
+            {this.state.filteredWines.filter(wine => wine.color === 'ROSE').map(wine => (
+              <ListItem
+                key={'WineView/' + wine.id}
+                disableTouchRipple
+                onClick={this.setCurrentWine(wine)}
+              >
+                <WineSelectable wine={wine} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
       </div>
     )
   }
