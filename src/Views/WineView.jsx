@@ -2,16 +2,43 @@ import React, { Component } from 'react'
 import { Dialog, List, ListItem, TextField } from 'material-ui'
 import { WineSelectable } from '../Components/Wine/WineSelectable'
 import WineForm from '../Components/Wine/WineForm'
+import { WineResource } from '../Utils/resources/wineResource'
 
 class WineView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      wines: props.wines,
-      filteredWines: props.wines,
+      wines: [],
+      filteredWines: [],
       currentWine: false,
+      isLoading: false,
     }
     this.filterWines = this.filterWines.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState(
+      {
+        isLoading: false,
+      },
+      () => {
+        WineResource.getAllWines()
+          .then(wines => {
+            this.setState({
+              wines: wines,
+              filteredWines: wines,
+              isLoading: false,
+            })
+          })
+          .catch(() => {
+            this.setState({
+              wines: [],
+              filteredWines: [],
+              isLoading: false,
+            })
+          })
+      }
+    )
   }
 
   voidCurrentWine() {
@@ -39,61 +66,64 @@ class WineView extends Component {
   render() {
     return (
       <div>
-        <div style={{ margin: 'auto', width: '50%' }}>
-          <TextField
-            id="WineView.TextField.Search"
-            onChange={this.filterWines}
-            floatingLabelText="Suchen"
-            fullWidth
-          />
-        </div>
-        <Dialog
-          title={this.state.currentWine.name}
-          modal={false}
-          open={!!this.state.currentWine}
-          autoDetectWindowHeight
-          autoScrollBodyContent
-          onRequestClose={this.voidCurrentWine()}
-        >
-          <WineForm wine={this.state.currentWine} />
-        </Dialog>
+        {this.state.isLoading && <span>Loading</span>}
+        <div>
+          <div style={{ margin: 'auto', width: '50%' }}>
+            <TextField
+              id="WineView.TextField.Search"
+              onChange={this.filterWines}
+              floatingLabelText="Suchen"
+              fullWidth
+            />
+          </div>
+          <Dialog
+            title={this.state.currentWine.name}
+            modal={false}
+            open={!!this.state.currentWine}
+            autoDetectWindowHeight
+            autoScrollBodyContent
+            onRequestClose={this.voidCurrentWine()}
+          >
+            <WineForm wine={this.state.currentWine} />
+          </Dialog>
 
-        <div style={{ margin: 'auto', width: '90%', textAlign: 'center', display: 'flex' }}>
-          <List>
-            {this.state.filteredWines.filter(wine => wine.color === 'WHITE').map(wine => (
-              <ListItem
-                key={'WineView/' + wine.id}
-                disableTouchRipple
-                onClick={this.setCurrentWine(wine)}
-              >
-                <WineSelectable wine={wine} />
-              </ListItem>
-            ))}
-          </List>
+          <div style={{ margin: 'auto', width: '90%', textAlign: 'center', display: 'flex' }}>
+            <List>
+              {this.state.filteredWines.filter(wine => wine.color === 'WHITE').map(wine => (
+                <ListItem
+                  key={'WineView/' + wine.id}
+                  disableTouchRipple
+                  onClick={this.setCurrentWine(wine)}
+                >
+                  <WineSelectable wine={wine} />
+                </ListItem>
+              ))}
+            </List>
 
-          <List>
-            {this.state.filteredWines.filter(wine => wine.color === 'RED').map(wine => (
-              <ListItem
-                key={'WineView/' + wine.id}
-                disableTouchRipple
-                onClick={this.setCurrentWine(wine)}
-              >
-                <WineSelectable wine={wine} />
-              </ListItem>
-            ))}
-          </List>
+            <List>
+              {this.state.filteredWines.filter(wine => wine.color === 'RED').map(wine => (
+                <ListItem
+                  key={'WineView/' + wine.id}
+                  disableTouchRipple
+                  onClick={this.setCurrentWine(wine)}
+                >
+                  <WineSelectable wine={wine} />
+                </ListItem>
+              ))}
+            </List>
 
-          <List>
-            {this.state.filteredWines.filter(wine => wine.color === 'ROSE').map(wine => (
-              <ListItem
-                key={'WineView/' + wine.id}
-                disableTouchRipple
-                onClick={this.setCurrentWine(wine)}
-              >
-                <WineSelectable wine={wine} />
-              </ListItem>
-            ))}
-          </List>
+            <List>
+              {this.state.filteredWines.filter(wine => wine.color === 'ROSE').map(wine => (
+                <ListItem
+                  key={'WineView/' + wine.id}
+                  disableTouchRipple
+                  onClick={this.setCurrentWine(wine)}
+                >
+                  <WineSelectable wine={wine} />
+                </ListItem>
+              ))}
+            </List>
+          </div>
         </div>
       </div>
     )

@@ -13,11 +13,12 @@ class SellerView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      sellers: props.sellers,
-      filteredSellers: props.sellers,
+      sellers: [],
+      filteredSellers: [],
       editSeller: false,
       orderSeller: false,
       isAddWineOpen: false,
+      isLoading: false,
     }
 
     this.style = {
@@ -29,6 +30,31 @@ class SellerView extends Component {
 
     this.switchAddWine = this.switchAddWine.bind(this)
     this.filterSellers = this.filterSellers.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState(
+      {
+        isLoading: false,
+      },
+      () => {
+        SellerResource.getAllSellers()
+          .then(sellers => {
+            this.setState({
+              sellers: sellers,
+              filteredSellers: sellers,
+              isLoading: false,
+            })
+          })
+          .catch(() => {
+            this.setState({
+              isLoading: false,
+              sellers: [],
+              filteredSellers: [],
+            })
+          })
+      }
+    )
   }
 
   onSellerClick(seller) {
@@ -70,6 +96,7 @@ class SellerView extends Component {
       }))
     }
   }
+
   filterSellers(event) {
     this.setState({
       filteredSellers: this.state.sellers.filter(seller =>
@@ -117,96 +144,99 @@ class SellerView extends Component {
 
     return (
       <div>
-        <div style={{ margin: 'auto', width: '50%' }}>
-          <TextField
-            id="SellerView.TextField.Search"
-            onChange={this.filterSellers}
-            floatingLabelText="Suchen"
-            fullWidth
-          />
-        </div>
-        <div style={{ display: 'flex' }}>
-          <Dialog
-            title={'Editiere ' + this.state.editSeller.name}
-            actions={editActions}
-            modal={false}
-            open={!!this.state.editSeller}
-            autoDetectWindowHeight
-            autoScrollBodyContent
-            onRequestClose={this.voidEditSeller()}
-          >
-            <SellerForm seller={this.state.editSeller} />
-            <Divider />
-            <List>
-              {this.state.editSeller.wines &&
-                this.state.editSeller.wines.map(wine => (
-                  <ListItem disableTouchRipple key={wine.id}>
-                    <WineSelectable wine={wine} />
-                    <FlatButton primary label="Entfernen" />
+        {this.state.isLoading && <span>Loading</span>}
+        <div>
+          <div style={{ margin: 'auto', width: '50%' }}>
+            <TextField
+              id="SellerView.TextField.Search"
+              onChange={this.filterSellers}
+              floatingLabelText="Suchen"
+              fullWidth
+            />
+          </div>
+          <div style={{ display: 'flex' }}>
+            <Dialog
+              title={'Editiere ' + this.state.editSeller.name}
+              actions={editActions}
+              modal={false}
+              open={!!this.state.editSeller}
+              autoDetectWindowHeight
+              autoScrollBodyContent
+              onRequestClose={this.voidEditSeller()}
+            >
+              <SellerForm seller={this.state.editSeller} />
+              <Divider />
+              <List>
+                {this.state.editSeller.wines &&
+                  this.state.editSeller.wines.map(wine => (
+                    <ListItem disableTouchRipple key={wine.id}>
+                      <WineSelectable wine={wine} />
+                      <FlatButton primary label="Entfernen" />
+                    </ListItem>
+                  ))}
+              </List>
+              <FlatButton primary label="Wein hinzufügen" onClick={this.switchAddWine} />
+              <Divider />
+            </Dialog>
+
+            <Dialog
+              title={'Bestellen bei ' + this.state.orderSeller.name}
+              actions={orderActions}
+              modal={false}
+              open={!!this.state.orderSeller}
+              autoScrollBodyContent
+              autoDetectWindowHeight
+              onRequestClose={this.voidOrderSeller()}
+            >
+              <WineCounterList wines={this.state.orderSeller.wines} />
+            </Dialog>
+
+            <Dialog
+              title={'Wein hinzufügen'}
+              actions={addActions}
+              modal={false}
+              open={!!this.state.isAddWineOpen}
+              autoScrollBodyContent
+              autoDetectWindowHeight
+              onRequestClose={this.switchAddWine}
+            >
+              <WineForm />
+            </Dialog>
+
+            <Paper style={this.style}>
+              <List>
+                {this.state.filteredSellers.map(seller => (
+                  <ListItem
+                    key={'SellerView/' + seller.id}
+                    disableTouchRipple
+                    onClick={this.onSellerClick(seller)}
+                  >
+                    <SellerSelectable seller={seller} />
+                    <FlatButton onClick={this.setEditSeller(seller)} label="Edit" />
+                    <FlatButton onClick={this.setOrderSeller(seller)} label="Order" />
                   </ListItem>
                 ))}
-            </List>
-            <FlatButton primary label="Wein hinzufügen" onClick={this.switchAddWine} />
-            <Divider />
-          </Dialog>
-
-          <Dialog
-            title={'Bestellen bei ' + this.state.orderSeller.name}
-            actions={orderActions}
-            modal={false}
-            open={!!this.state.orderSeller}
-            autoScrollBodyContent
-            autoDetectWindowHeight
-            onRequestClose={this.voidOrderSeller()}
-          >
-            <WineCounterList wines={this.state.orderSeller.wines} />
-          </Dialog>
-
-          <Dialog
-            title={'Wein hinzufügen'}
-            actions={addActions}
-            modal={false}
-            open={!!this.state.isAddWineOpen}
-            autoScrollBodyContent
-            autoDetectWindowHeight
-            onRequestClose={this.switchAddWine}
-          >
-            <WineForm />
-          </Dialog>
-
-          <Paper style={this.style}>
-            <List>
-              {this.state.filteredSellers.map(seller => (
-                <ListItem
-                  key={'SellerView/' + seller.id}
-                  disableTouchRipple
-                  onClick={this.onSellerClick(seller)}
-                >
-                  <SellerSelectable seller={seller} />
-                  <FlatButton onClick={this.setEditSeller(seller)} label="Edit" />
-                  <FlatButton onClick={this.setOrderSeller(seller)} label="Order" />
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
-          <Paper style={this.style}>
-            <Map center={center} zoom={13} className="map__reactleaflet">
-              <TileLayer
-                url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={token}"
-                id="mapbox.satellite"
-                token={config.mapbox_token}
-              />
-              <div style={{ height: 500 }}>
-                {markers.map((marker, index) => (
-                  <Marker position={marker.position} key={`marker_${index}`}>
-                    <Popup>
-                      <span>{marker.content}</span>
-                    </Popup>
-                  </Marker>
-                ))}
-              </div>
-            </Map>
-          </Paper>
+              </List>
+            </Paper>
+            <Paper style={this.style}>
+              <Map center={center} zoom={13} className="map__reactleaflet">
+                <TileLayer
+                  url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={token}"
+                  id="mapbox.satellite"
+                  token={config.mapbox_token}
+                />
+                <div style={{ height: 500 }}>
+                  {markers.map((marker, index) => (
+                    <Marker position={marker.position} key={`marker_${index}`}>
+                      <Popup>
+                        <span>{marker.content}</span>
+                      </Popup>
+                    </Marker>
+                  ))}
+                </div>
+              </Map>
+            </Paper>
+          </div>
         </div>
       </div>
     )

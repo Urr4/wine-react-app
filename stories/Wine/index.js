@@ -6,7 +6,6 @@ import wines from "./fixtures/wines.json"
 import {MuiThemeProviderDecorator} from '../decorators'
 import {WineSelectable} from "../../src/Components/Wine/WineSelectable";
 import WineForm from "../../src/Components/Wine/WineForm";
-import WineView from "../../src/Views/WineView";
 import WineCounter from "../../src/Components/Wine/WineCounter";
 import WineCounterList from "../../src/Components/Wine/WineCounterList";
 
@@ -50,13 +49,4 @@ export default storiesOf =>
       <WineSelectable wine={redwine}>
         <WineForm wine={redwine}/>
       </WineSelectable>
-    ))
-
-    .add('Deletable WineSelectable', () => (
-      <WineSelectable wine={redwine} isDeletable={true}>
-      </WineSelectable>
-    ))
-
-    .add('WineView', () => (
-      <WineView wines={wines}/>
     ))

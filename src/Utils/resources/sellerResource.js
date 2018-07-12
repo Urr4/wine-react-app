@@ -3,20 +3,16 @@ import config from '../../config/config.json'
 const sellerRoot = 'sellers'
 
 export const SellerResource = {
-  getAllSeller: () => {
+  getAllSellers: () => {
     return fetch(`${config.backend_url}/${sellerRoot}`, {
       method: 'GET',
-    })
-      .then(response => response.json())
-      .catch(() => console.log(`Could not load all Sellers`))
+    }).then(response => response.json())
   },
 
   getSellerById: id => {
     return fetch(`${config.backend_url}/${sellerRoot}/${id}`, {
       method: 'GET',
-    })
-      .then(response => response.json())
-      .catch(() => console.log(`Could not load Seller ${id}`))
+    }).then(response => response.json())
   },
 
   updateSeller: seller => {
@@ -24,9 +20,7 @@ export const SellerResource = {
       return fetch(`${config.backend_url}/${sellerRoot}/`, {
         method: 'PUT',
         body: seller,
-      })
-        .then(response => response.json())
-        .catch(() => console.log(`Could not update Seller ${seller}`))
+      }).then(response => response.json())
     }
   },
 
@@ -34,12 +28,12 @@ export const SellerResource = {
     return fetch(`${config.backend_url}/${sellerRoot}/`, {
       method: 'POST',
       body: seller,
-    }).catch(() => console.log(`Could not save Seller ${seller}`))
+    })
   },
 
   deactiveSeller: id => {
     return fetch(`${config.backend_url}/${sellerRoot}/${id}`, {
       method: 'DELETE',
-    }).catch(() => console.log(`Could not deactivate Seller ${id}`))
+    })
   },
 }

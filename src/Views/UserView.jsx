@@ -2,16 +2,43 @@ import React, { Component } from 'react'
 import UserChip from '../Components/User/UserChip'
 import { Dialog, FlatButton, List, ListItem, TextField } from 'material-ui'
 import WineView from './WineView'
+import { UserResource } from '../Utils/resources/userResource'
 
 class UserView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      users: props.users,
-      filteredUsers: props.users,
+      users: [],
+      filteredUsers: [],
       currentUser: false,
+      isLoading: false,
     }
     this.filterUsers = this.filterUsers.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState(
+      {
+        isLoading: false,
+      },
+      () => {
+        UserResource.getAllUsers()
+          .then(users => {
+            this.setState({
+              users: users,
+              filteredUsers: users,
+              isLoading: false,
+            })
+          })
+          .catch(() => {
+            this.setState({
+              isLoading: false,
+              users: [],
+              filteredUsers: [],
+            })
+          })
+      }
+    )
   }
 
   voidCurrentUser() {
@@ -41,38 +68,41 @@ class UserView extends Component {
 
     return (
       <div>
-        <Dialog
-          title={'Weine von ' + this.state.currentUser.name}
-          actions={addWineAction}
-          modal={false}
-          open={!!this.state.currentUser}
-          autoDetectWindowHeight
-          autoScrollBodyContent
-          onRequestClose={this.voidCurrentUser()}
-        >
-          <WineView
-            wines={this.state.currentUser.likedWines}
-            isDeletable={false}
-            isEditable={false}
-          />
-        </Dialog>
+        {this.state.isLoading && <span>Loading</span>}
+        <div>
+          <Dialog
+            title={'Weine von ' + this.state.currentUser.name}
+            actions={addWineAction}
+            modal={false}
+            open={!!this.state.currentUser}
+            autoDetectWindowHeight
+            autoScrollBodyContent
+            onRequestClose={this.voidCurrentUser()}
+          >
+            <WineView
+              wines={this.state.currentUser.likedWines}
+              isDeletable={false}
+              isEditable={false}
+            />
+          </Dialog>
 
-        <div style={{ margin: 'auto', width: '50%' }}>
-          <TextField
-            id="UserView.TextField.Search"
-            onChange={this.filterUsers}
-            floatingLabelText="Suchen"
-            fullWidth
-          />
-        </div>
-        <div style={{ display: 'flex' }}>
-          <List>
-            {this.state.filteredUsers.map(user => (
-              <ListItem key={'UserView/' + user.id} disableTouchRipple>
-                <UserChip user={user} onClick={this.setCurrentUser(user)} />
-              </ListItem>
-            ))}
-          </List>
+          <div style={{ margin: 'auto', width: '50%' }}>
+            <TextField
+              id="UserView.TextField.Search"
+              onChange={this.filterUsers}
+              floatingLabelText="Suchen"
+              fullWidth
+            />
+          </div>
+          <div style={{ display: 'flex' }}>
+            <List>
+              {this.state.filteredUsers.map(user => (
+                <ListItem key={'UserView/' + user.id} disableTouchRipple>
+                  <UserChip user={user} onClick={this.setCurrentUser(user)} />
+                </ListItem>
+              ))}
+            </List>
+          </div>
         </div>
       </div>
     )
