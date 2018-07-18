@@ -19,14 +19,14 @@ class WineView extends Component {
   componentDidMount() {
     this.setState(
       {
-        isLoading: false,
+        isLoading: true,
       },
       () => {
         WineResource.getAllWines()
           .then(wines => {
             this.setState({
-              wines: wines,
-              filteredWines: wines,
+              wines: wines.sort(),
+              filteredWines: wines.sort(),
               isLoading: false,
             })
           })
@@ -89,7 +89,7 @@ class WineView extends Component {
 
           <div style={{ margin: 'auto', width: '90%', textAlign: 'center', display: 'flex' }}>
             <List>
-              {this.state.filteredWines.filter(wine => wine.color === 'WHITE').map(wine => (
+              {this.state.filteredWines.filter(wine => wine.colors.includes('Whitewine')).map(wine => (
                 <ListItem
                   key={'WineView/' + wine.id}
                   disableTouchRipple
@@ -101,7 +101,7 @@ class WineView extends Component {
             </List>
 
             <List>
-              {this.state.filteredWines.filter(wine => wine.color === 'RED').map(wine => (
+              {this.state.filteredWines.filter(wine => wine.colors.includes('Redwine')).map(wine => (
                 <ListItem
                   key={'WineView/' + wine.id}
                   disableTouchRipple
@@ -113,7 +113,7 @@ class WineView extends Component {
             </List>
 
             <List>
-              {this.state.filteredWines.filter(wine => wine.color === 'ROSE').map(wine => (
+              {this.state.filteredWines.filter(wine => wine.colors.includes('Rosewine')).map(wine => (
                 <ListItem
                   key={'WineView/' + wine.id}
                   disableTouchRipple

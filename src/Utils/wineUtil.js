@@ -1,12 +1,14 @@
-export const getHexColor = color => {
-  switch (color) {
-    case 'RED':
-      return '#cc0044'
-    case 'WHITE':
-      return '#ffc128'
-    case 'ROSE':
-      return '#ff00aa'
-    default:
-      return '#808080'
+export const getHexColor = colors => {
+  if(colors.includes('Redwine')){
+    return '#cc0044'
+  }
+  if(colors.includes('Whitewine')) {
+    return '#ffc128'
+  }
+  if(colors.includes('Rosewine')){
+    return '#ff00aa'
+  }
+  else{
+    return '#808080'
   }
 }

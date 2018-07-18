@@ -19,22 +19,22 @@ class UserView extends Component {
   componentDidMount() {
     this.setState(
       {
-        isLoading: false,
+        isLoading: true,
       },
       () => {
         UserResource.getAllUsers()
           .then(users => {
             this.setState({
-              users: users,
-              filteredUsers: users,
+              users: users.sort(),
+              filteredUsers: users.sort(),
               isLoading: false,
             })
           })
           .catch(() => {
             this.setState({
-              isLoading: false,
               users: [],
               filteredUsers: [],
+              isLoading: false,
             })
           })
       }

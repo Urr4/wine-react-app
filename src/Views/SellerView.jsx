@@ -35,14 +35,14 @@ class SellerView extends Component {
   componentDidMount() {
     this.setState(
       {
-        isLoading: false,
+        isLoading: true,
       },
       () => {
         SellerResource.getAllSellers()
           .then(sellers => {
             this.setState({
-              sellers: sellers,
-              filteredSellers: sellers,
+              sellers: sellers.sort(),
+              filteredSellers: sellers.sort(),
               isLoading: false,
             })
           })

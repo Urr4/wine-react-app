@@ -15,13 +15,13 @@ class OrderView extends Component {
   componentDidMount() {
     this.setState(
       {
-        isLoading: false,
+        isLoading: true,
       },
       () => {
         OrderResource.getAllOrders()
           .then(orders => {
             this.setState({
-              orders: orders,
+              orders: orders.sort(),
               isLoading: false,
             })
           })
@@ -47,6 +47,7 @@ class OrderView extends Component {
               </ListItem>
             ))}
           </List>
+          {this.state.orders.length === 0 && <span>Keine Bestellungen gefunden</span>}
         </div>
       </div>
     )
