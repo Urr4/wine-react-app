@@ -21,7 +21,7 @@ class OrderView extends Component {
         OrderResource.getAllOrders()
           .then(orders => {
             this.setState({
-              orders: orders.sort(),
+              orders: orders,
               isLoading: false,
             })
           })

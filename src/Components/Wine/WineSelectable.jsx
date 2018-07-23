@@ -1,8 +1,8 @@
-import React, {PureComponent} from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import {Card, CardHeader, CardText} from 'material-ui'
-import {getHexColor} from '../../Utils/wineUtil'
-import {BerryChip} from '../Berry/BerryChip'
+import { Card, CardHeader, CardText } from 'material-ui'
+import { getHexColor } from '../../Utils/wineUtil'
+import { BerryChip } from '../Berry/BerryChip'
 
 class WineSelectable extends PureComponent {
   constructor(props) {
@@ -48,7 +48,7 @@ class WineSelectable extends PureComponent {
               }}
             >
               {this.state.wine.berries.map(berry => (
-                <BerryChip berry={berry} key={'WineSelectable/' + berry.id}/>
+                <BerryChip berry={berry} key={'WineSelectable/' + berry.id} />
               ))}
             </div>
           </CardHeader>
@@ -72,4 +72,4 @@ WineSelectable.propTypes = {
   }).isRequired,
 }
 
-export {WineSelectable}
+export { WineSelectable }

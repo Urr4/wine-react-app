@@ -40,11 +40,16 @@ class SellerView extends Component {
       () => {
         SellerResource.getAllSellers()
           .then(sellers => {
-            this.setState({
-              sellers: sellers.sort(),
-              filteredSellers: sellers.sort(),
-              isLoading: false,
-            })
+            this.setState(
+              {
+                sellers: sellers,
+                filteredSellers: sellers,
+                isLoading: false,
+              },
+              () => {
+                console.log(this.state.sellers)
+              }
+            )
           })
           .catch(() => {
             this.setState({

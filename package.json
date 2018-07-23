@@ -33,7 +33,7 @@
     "build-storybook": "build-storybook",
     "dist": "sagui dist",
     "format": "sagui format",
-    "start": "sagui develop --port 3000",
+    "start": "sagui develop --port 3001",
     "storybook": "start-storybook -p 6007",
     "test": "sagui test",
     "test:lint": "sagui test:lint",

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import UserChip from '../Components/User/UserChip'
 import { Dialog, FlatButton, List, ListItem, TextField } from 'material-ui'
-import WineView from './WineView'
 import { UserResource } from '../Utils/resources/userResource'
+import { WineSelectable } from '../Components/Wine/WineSelectable'
 
 class UserView extends Component {
   constructor(props) {
@@ -24,11 +24,16 @@ class UserView extends Component {
       () => {
         UserResource.getAllUsers()
           .then(users => {
-            this.setState({
-              users: users.sort(),
-              filteredUsers: users.sort(),
-              isLoading: false,
-            })
+            this.setState(
+              {
+                users: users,
+                filteredUsers: users,
+                isLoading: false,
+              },
+              () => {
+                console.log(this.state.users)
+              }
+            )
           })
           .catch(() => {
             this.setState({
@@ -70,22 +75,6 @@ class UserView extends Component {
       <div>
         {this.state.isLoading && <span>Loading</span>}
         <div>
-          <Dialog
-            title={'Weine von ' + this.state.currentUser.name}
-            actions={addWineAction}
-            modal={false}
-            open={!!this.state.currentUser}
-            autoDetectWindowHeight
-            autoScrollBodyContent
-            onRequestClose={this.voidCurrentUser()}
-          >
-            <WineView
-              wines={this.state.currentUser.likedWines}
-              isDeletable={false}
-              isEditable={false}
-            />
-          </Dialog>
-
           <div style={{ margin: 'auto', width: '50%' }}>
             <TextField
               id="UserView.TextField.Search"
@@ -95,6 +84,25 @@ class UserView extends Component {
             />
           </div>
           <div style={{ display: 'flex' }}>
+            <Dialog
+              title={'Weine von ' + this.state.currentUser.name}
+              actions={addWineAction}
+              modal={false}
+              open={!!this.state.currentUser}
+              autoDetectWindowHeight
+              autoScrollBodyContent
+              onRequestClose={this.voidCurrentUser()}
+            >
+              <List>
+                {this.state.currentUser &&
+                  this.state.currentUser.likedWines.map(wine => (
+                    <ListItem key={'UserView/' + wine.id} disableTouchRipple>
+                      <WineSelectable wine={wine} />
+                    </ListItem>
+                  ))}
+              </List>
+            </Dialog>
+
             <List>
               {this.state.filteredUsers.map(user => (
                 <ListItem key={'UserView/' + user.id} disableTouchRipple>

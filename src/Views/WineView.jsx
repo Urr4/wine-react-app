@@ -25,8 +25,8 @@ class WineView extends Component {
         WineResource.getAllWines()
           .then(wines => {
             this.setState({
-              wines: wines.sort(),
-              filteredWines: wines.sort(),
+              wines: wines,
+              filteredWines: wines,
               isLoading: false,
             })
           })
@@ -89,39 +89,45 @@ class WineView extends Component {
 
           <div style={{ margin: 'auto', width: '90%', textAlign: 'center', display: 'flex' }}>
             <List>
-              {this.state.filteredWines.filter(wine => wine.colors.includes('Whitewine')).map(wine => (
-                <ListItem
-                  key={'WineView/' + wine.id}
-                  disableTouchRipple
-                  onClick={this.setCurrentWine(wine)}
-                >
-                  <WineSelectable wine={wine} />
-                </ListItem>
-              ))}
+              {this.state.filteredWines
+                .filter(wine => wine.colors.includes('Whitewine'))
+                .map(wine => (
+                  <ListItem
+                    key={'WineView/' + wine.id}
+                    disableTouchRipple
+                    onClick={this.setCurrentWine(wine)}
+                  >
+                    <WineSelectable wine={wine} />
+                  </ListItem>
+                ))}
             </List>
 
             <List>
-              {this.state.filteredWines.filter(wine => wine.colors.includes('Redwine')).map(wine => (
-                <ListItem
-                  key={'WineView/' + wine.id}
-                  disableTouchRipple
-                  onClick={this.setCurrentWine(wine)}
-                >
-                  <WineSelectable wine={wine} />
-                </ListItem>
-              ))}
+              {this.state.filteredWines
+                .filter(wine => wine.colors.includes('Redwine'))
+                .map(wine => (
+                  <ListItem
+                    key={'WineView/' + wine.id}
+                    disableTouchRipple
+                    onClick={this.setCurrentWine(wine)}
+                  >
+                    <WineSelectable wine={wine} />
+                  </ListItem>
+                ))}
             </List>
 
             <List>
-              {this.state.filteredWines.filter(wine => wine.colors.includes('Rosewine')).map(wine => (
-                <ListItem
-                  key={'WineView/' + wine.id}
-                  disableTouchRipple
-                  onClick={this.setCurrentWine(wine)}
-                >
-                  <WineSelectable wine={wine} />
-                </ListItem>
-              ))}
+              {this.state.filteredWines
+                .filter(wine => wine.colors.includes('Rosewine'))
+                .map(wine => (
+                  <ListItem
+                    key={'WineView/' + wine.id}
+                    disableTouchRipple
+                    onClick={this.setCurrentWine(wine)}
+                  >
+                    <WineSelectable wine={wine} />
+                  </ListItem>
+                ))}
             </List>
           </div>
         </div>
