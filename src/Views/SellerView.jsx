@@ -240,6 +240,10 @@ class SellerView extends Component {
                   ))}
                 </div>
               </Map>
+              <div>
+                <SellerForm seller={{}} />
+                <FlatButton label="Anlegen" primary fullWidth onClick={console.log('hi')} />
+              </div>
             </Paper>
           </div>
         </div>
